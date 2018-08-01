@@ -1,0 +1,73 @@
+{
+	"folders": [
+		{
+			"name": "Root",
+			"path": ".",
+		},
+	],
+	"settings": {
+		// editor settings
+		"editor.rulers": [
+			100, // mandated, since airbnb's config cuts off at 100 lines
+		],
+		// prettier will auto-detect and format code according to our ESLint settings
+		"prettier.eslintIntegration": true,
+		"eslint.packageManager": "yarn",
+		"[javascript]": {
+			"editor.tabSize": 2,
+		},
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Debug in Expo",
+				"program": "${workspaceRoot}/.vscode/launchReactNative.js",
+				"type": "reactnative",
+				"request": "launch",
+				"platform": "exponent",
+				"sourceMaps": true,
+				"outDir": "${workspaceRoot}/.vscode/.react"
+			},
+			{
+				"name": "Debug iOS",
+				"program": "${workspaceRoot}/.vscode/launchReactNative.js",
+				"type": "reactnative",
+				"request": "launch",
+				"platform": "ios",
+				"sourceMaps": true,
+				"outDir": "${workspaceRoot}/.vscode/.react"
+			},
+			{
+				"name": "Debug Android",
+				"program": "${workspaceRoot}/.vscode/launchReactNative.js",
+				"type": "reactnative",
+				"request": "launch",
+				"platform": "android",
+				"sourceMaps": true,
+				"outDir": "${workspaceRoot}/.vscode/.react"
+			},
+			{
+				"name": "Attach to packager",
+				"program": "${workspaceRoot}/.vscode/launchReactNative.js",
+				"type": "reactnative",
+				"request": "attach",
+				"sourceMaps": true,
+				"outDir": "${workspaceRoot}/.vscode/.react"
+			}
+		]
+	},
+	"extensions": {
+		"recommendations": [
+			"formulahendry.auto-close-tag",
+			"formulahendry.auto-rename-tag",
+			"dsznajder.es7-react-js-snippets",
+			"dbaeumer.vscode-eslint",
+			"ziyasal.vscode-open-in-github",
+			"esbenp.prettier-vscode",
+			"jpoissonnier.vscode-styled-components",
+      "ms-vsliveshare.vsliveshare",
+      "vsmobile.vscode-react-native",
+		]
+	}
+}

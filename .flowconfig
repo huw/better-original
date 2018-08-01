@@ -1,0 +1,13 @@
+[ignore]
+.*/node_modules/xdl/.*
+.*/node_modules/react-native/Libraries/.*
+
+[include]
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]
