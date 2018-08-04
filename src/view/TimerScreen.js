@@ -3,41 +3,11 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import moment from 'moment';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    borderBottomWidth: 0.5,
-    paddingTop: 20,
-    paddingBottom: 10,
-    backgroundColor: '#00FF00',
-  },
-  title: {
-    alignSelf: 'center',
-    fontWeight: '600',
-  },
-  timerWrapper: {
-    backgroundColor: '#FFFFFF',
-  },
-  top: {
-    flex: 1,
-  },
-  bottom: {
-    flex: 2,
-    backgroundColor: '#F0EFF5',
-  },
   mainTimer: {
-    fontSize: 60,
+    fontSize: 70,
     fontWeight: '100',
-    borderWidth: 0.5,
     alignSelf: 'center',
   },
-  /*
-  LapTimer: {
-    fontSize: 18,
-    borderWidth: 0.5,
-    alignSelf: 'center',
-  },*/
 });
 
 type Props = {
@@ -51,14 +21,11 @@ export default class TimerScreen extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
-      //startDate: new Date(),
       startTime: moment(),
     };
 
     setInterval(() => {
       this.setState(prevState => ({
-        //timeMin: ((new Date().getMinutes() - prevState.startDate.getMinutes()) >= 0 ? new Date().getMinutes() - prevState.startDate.getMinutes() : new Date().getMinutes() - prevState.startDate.getMinutes() + 60),
-        //timeSec: ((new Date().getSeconds() - prevState.startDate.getSeconds()) >= 0 ? new Date().getSeconds() - prevState.startDate.getSeconds() : new Date().getSeconds() - prevState.startDate.getSeconds() + 60),
         time: moment() - prevState.startTime,
       }));
     }, 100);

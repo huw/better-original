@@ -10,7 +10,7 @@ const LEFT = 'left';
 const RIGHT = 'right';
 
 const CenterView = styled.View`
-  flex: 1;
+  flex: 1;  
   background-color: white;
   justify-content: space-evenly;
 `;
