@@ -16,6 +16,9 @@
 		"[javascript]": {
 			"editor.tabSize": 2,
 		},
+		"editor.formatOnPaste": false,
+    "editor.formatOnType": false,
+		"editor.formatOnSave": false,
 	},
 	"launch": {
 		"version": "0.2.0",
