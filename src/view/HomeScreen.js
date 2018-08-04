@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Button } from 'react-native';
+import { Button, AsyncStorage } from 'react-native';
 
 const CenterView = styled.View`
   flex: 1;
@@ -13,21 +13,33 @@ const CenterView = styled.View`
 type Props = {
   navigation: {
     navigate: (string) => mixed,
+    getParam: (string) => mixed,
   },
 };
 
 export default class HomeScreen extends React.Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isPreSession: this.props.navigation.getParam('isPreSession', true),
+    };
+  }
+
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
-    navigate('Mood');
+    navigate('Mood', {
+      isPreSession: this.state.isPreSession,
+    });
   }
 
   render() {
+    this.state.isPreSession = this.props.navigation.getParam('isPreSession', true);
+    console.log('HomeScreen: '.concat(this.state.isPreSession));
     return (
       <CenterView>
         <Button
           onPress={this.onPressButton}
-          title="Mood"
+          title={this.state.isPreSession ? 'Start Session' : 'End Session'}
           color="#000"
         />
       </CenterView>
