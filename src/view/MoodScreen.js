@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Text, StatusBar, AsyncStorage } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import { Container, Content } from 'native-base';
+import _ from 'lodash';
 
 import styles from '../constants/styles';
 import feelings, { type Feeling } from '../constants/feelings';
@@ -39,7 +40,7 @@ export default class MoodScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      cards: feelings,
+      cards: _.shuffle(feelings),
       amFeeling: [],
       notFeeling: [],
     };
