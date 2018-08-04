@@ -15,6 +15,8 @@ const CenterView = styled.View`
   justify-content: center;
 `;
 
+const goodEmotions = ['happy', 'relaxed', 'loved', 'calm', 'caring', 'grateful', 'inspired', 'motivated'];
+
 type Props = {
   navigation: {
     navigate: (string) => mixed,
@@ -46,7 +48,20 @@ export default class HomeScreen extends React.Component<Props> {
     });
   }
 
+  stats() {
+    AsyncStorage.getItem('moods', (err, result) => {
+      if (err) throw err;
+      const table = JSON.parse(result);
+      for (let i = 0; i < table.length; i++) {
+        console.log("ID: " + table[i].ID);
+        console.log("Good Emotions: " + table[i].moods.filter(emotion => goodEmotions.includes(emotion)).length);
+      }
+    })
+  }
+
   render() {
+    this.stats();
+
     return (
       <CenterView>
         <StatusBar barStyle="light-content"/>
