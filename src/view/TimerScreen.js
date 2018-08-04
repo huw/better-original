@@ -81,6 +81,7 @@ export default class TimerScreen extends React.Component<Props> {
     });
     this.props.navigation.push('Mood', {
       isPreSession: false,
+      meditationID: currentMeditationID,
     });
   }
 

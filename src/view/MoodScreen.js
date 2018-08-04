@@ -13,34 +13,33 @@ const RIGHT = 'right';
 const CenterView = styled.View`
   flex: 1;
   background-color: #262626;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
 `;
 
-const SwipeCardsContainer = styled.View`
-  height: 400;
+const DoneContainer = styled.View`
+  width: 150;
+  height: 75;
+  justify-content: center;
 `;
 
-const SwipeButtonContainer = styled.View`
-  /* flex: 1; */
-  height: 10;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: flex-end;
+
+const DoneButton = styled(Button)`
+  width: 150;
+  height: 75;
+  justify-content: center;
 `;
 
-const StyledText = styled.Text`
-  color: white;
+const DoneText = styled.Text`
+  font-size: 40;
   font-weight: bold;
-  font-size: 30;
-  justify-content: center;
-  align-items: center;
+  color: black;
 `;
 
-const StyledButton = styled(Button)`
-  width: 80;
-  height: 50;
-  justify-content: center;
-  align-items: center;
+const InstructionsText = styled.Text`
+  font-size: 15;
+  color: rgba(255, 255, 255, 0.6);
+  top: 40;
 `;
 
 type Props = {
@@ -185,46 +184,43 @@ export default class MoodScreen extends React.Component<Props> {
     });
 
     return (
-      <Button
-        onPress={() => this.props.navigation.navigate(
-          isPreSessionParam ? 'Timer' : 'Home',
-          { meditationID: currentMeditationID },
-        )}
-        title="DONE"
-        color="black"
-      />
+      // <Button
+      //   onPress={() => this.props.navigation.navigate(
+      //     isPreSessionParam ? 'Timer' : 'Home',
+      //     { meditationID: currentMeditationID },
+      //   )}
+      //   title="DONE"
+      //   color="black"
+      // />
+      <DoneContainer>
+        <DoneButton rounded light onPress={() => this.props.navigation.navigate(
+       isPreSessionParam ? 'Timer' : 'Home',
+       { meditationID: currentMeditationID },
+       )}>
+          <DoneText>Done</DoneText>
+        </DoneButton>
+      </DoneContainer>
     );
   }
 
   render() {
     return (
       <CenterView>
-        <SwipeCardsContainer>
-          <SwipeCards
-            cards={this.state.cards}
-            renderCard={(cardProps: CardData) => <Card {...cardProps} />}
-            renderNoMoreCards={this.noMoreCards}
+        <InstructionsText>
+          swipe left for no &amp; right for yes
+        </InstructionsText>
+        <SwipeCards
+          cards={this.state.cards}
+          renderCard={(cardProps: CardData) => <Card {...cardProps} />}
+          renderNoMoreCards={this.noMoreCards}
 
-            showYup={false}
-            showNope={false}
-            handleYup={this.onYes}
-            handleNope={this.onNo}
+          showYup={false}
+          showNope={false}
+          handleYup={this.onYes}
+          handleNope={this.onNo}
 
-            dragY={false}
-          />
-        </SwipeCardsContainer>
-        <SwipeButtonContainer>
-          <StyledButton danger>
-            <StyledText>
-              No
-            </StyledText>
-          </StyledButton>
-          <StyledButton success>
-            <StyledText>
-              Yes
-            </StyledText>
-          </StyledButton>
-        </SwipeButtonContainer>
+          dragY={false}
+        />
       </CenterView>
     );
   }
