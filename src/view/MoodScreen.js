@@ -48,7 +48,6 @@ export default class MoodScreen extends React.Component<Props> {
       notFeeling: [],
       isPreSession: this.props.navigation.getParam('pre', true),
     };
-    this.SwipeCards = React.createRef();
   }
 
   onPressButton = (params) => {
@@ -56,14 +55,12 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   onYes = (card: CardData) => {
-    console.log(`I am ${card.value}`);
     this.setState((prevState => ({
       amFeeling: [...prevState.amFeeling, card.value],
     })));
   }
 
   onNo = (card: CardData) => {
-    console.log(`I am not ${card.value}`);
     this.state.notFeeling.push(card.value);
   }
 
@@ -98,9 +95,9 @@ export default class MoodScreen extends React.Component<Props> {
 
   forceSwipe = (direction: string) => {
     if (direction === LEFT) {
-      // this.SwipeCards._forceLeftSwipe(); // eslint-disable-line no-underscore-dangle
+      // this.refSwipeCards.current._forceLeftSwipe(); // eslint-disable-line no-underscore-dangle
     } else if (direction === RIGHT) {
-      // this.SwipeCards._forceRightSwipe(); // eslint-disable-line no-underscore-dangle
+      // this.refSwipeCards.current._forceRightSwipe(); // eslint-disable-line no-underscore-dangle
     }
   }
 
@@ -114,7 +111,6 @@ export default class MoodScreen extends React.Component<Props> {
           color="#000"
         />
         <SwipeCards
-          ref={this.SwipeCards}
           cards={this.state.cards}
           renderCard={(cardProps: CardData) => <Card {...cardProps} />}
           renderNoMoreCards={this.noMoreCards}
@@ -126,16 +122,16 @@ export default class MoodScreen extends React.Component<Props> {
 
           dragY={false}
         />
-        {/* <Button
-          onPress={this.forceSwipe(LEFT)}
+        <Button
+          onPress={() => { this.forceSwipe(LEFT); }}
           title="No"
           color="red"
         />
         <Button
-          onPress={this.forceSwipe(RIGHT)}
+          onPress={() => { this.forceSwipe(RIGHT); }}
           title="Yes"
           color="green"
-        /> */}
+        />
       </CenterView>
     );
   }
