@@ -12,7 +12,13 @@ const CenterView = styled.View`
   flex: 1;
   background-color: ${styles.backgroundColor};
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+`;
+
+const PrettyMessage= styled.Text`
+  font-size: 30;
+  color: ${styles.textColor};
+  font-weight: bold;
 `;
 
 const goodEmotions = ['happy', 'relaxed', 'loved', 'calm', 'calming', 'grateful', 'inspired', 'motivated'];
@@ -135,9 +141,9 @@ export default class HomeScreen extends React.Component<Props> {
   render() {
     return (
       <CenterView>
-        <Text>
+        <PrettyMessage>
           {this.state && this.state.chiSquaredMsg}
-        </Text>
+        </PrettyMessage>
         <Button
           onPress={this.onPressButton}
           title="Start Session"
