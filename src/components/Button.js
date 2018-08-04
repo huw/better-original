@@ -5,6 +5,7 @@ import { Button as BaseButton } from 'native-base';
 import { buttonStyle } from '../constants/styles';
 
 const StyledButton = styled(BaseButton)`
+  background-color: ${buttonStyle.backgroundColor};
   padding-left: ${buttonStyle.paddingHorizontal};
   padding-right: ${buttonStyle.paddingHorizontal};
   padding-top: ${buttonStyle.paddingVertical};
