@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Image } from 'react-native';
 
+import images from './../images/images.js';
+
 const PrettyCard = styled.View`
   justify-content: center;
   align-items: center;
@@ -21,14 +23,13 @@ export default class Card extends React.Component {
   }
 
   render() {
-    const path = `../images/${this.props.value}.png`;
-    // console.log(path);
+    let value = this.props.value;
     return (
       <PrettyCard
         backgroundColor={this.props.backgroundColor}
       >
         <Image
-          source={require('../images/happy.png')}
+          source={images[value]}
         />
         <Text>
           Are you {this.props.value}?
