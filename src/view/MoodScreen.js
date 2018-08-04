@@ -11,9 +11,20 @@ const RIGHT = 'right';
 
 const CenterView = styled.View`
   flex: 1;
-  background-color: #686b70;
-  align-items: center;
-  justify-content: center;
+  background-color: white;
+  justify-content: space-evenly;
+`;
+
+const SwipeCardsContainer = styled.View`
+  height: 400;
+`;
+
+const SwipeButtonContainer = styled.View`
+  /* flex: 1; */
+  height: 64;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
 `;
 
 type Props = {
@@ -46,7 +57,6 @@ export default class MoodScreen extends React.Component<Props> {
       ],
       amFeeling: [],
       notFeeling: [],
-      isPreSession: this.props.navigation.getParam('pre', true),
     };
   }
 
@@ -65,10 +75,11 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   noMoreCards = () => {
+    const isPreSession = this.props.navigation.getParam('isPreSession', true);
     const allFeelings = this.state.amFeeling.join('\n');
     const newMood = {
       date: new Date(),
-      isPreSession: this.state.isPreSession,
+      isPreSession: this.isPreSession,
       moods: this.state.amFeeling,
     };
     AsyncStorage.getItem('mood', (err, result) => {
@@ -83,10 +94,10 @@ export default class MoodScreen extends React.Component<Props> {
       AsyncStorage.setItem('mood', JSON.stringify(table));
       console.log(table);
     });
-    console.log('End of log: '.concat(this.state.isPreSession));
+
     return (
       <Button
-        onPress={() => this.props.navigation.navigate('Home', { isPreSession: !this.state.isPreSession })}
+        onPress={() => this.props.navigation.navigate(isPreSession ? 'Timer' : 'Home')}
         title="DONE"
         color="black"
       />
@@ -102,36 +113,34 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   render() {
-    this.state.isPreSession = this.props.navigation.getParam('isPreSession', true);
     return (
       <CenterView>
-        <Button
-          onPress={this.onPressButton}
-          title="Home"
-          color="#000"
-        />
-        <SwipeCards
-          cards={this.state.cards}
-          renderCard={(cardProps: CardData) => <Card {...cardProps} />}
-          renderNoMoreCards={this.noMoreCards}
+        <SwipeCardsContainer>
+          <SwipeCards
+            cards={this.state.cards}
+            renderCard={(cardProps: CardData) => <Card {...cardProps} />}
+            renderNoMoreCards={this.noMoreCards}
 
-          showYup={false}
-          showNope={false}
-          handleYup={this.onYes}
-          handleNope={this.onNo}
+            showYup={false}
+            showNope={false}
+            handleYup={this.onYes}
+            handleNope={this.onNo}
 
-          dragY={false}
-        />
-        <Button
-          onPress={() => { this.forceSwipe(LEFT); }}
-          title="No"
-          color="red"
-        />
-        <Button
-          onPress={() => { this.forceSwipe(RIGHT); }}
-          title="Yes"
-          color="green"
-        />
+            dragY={false}
+          />
+        </SwipeCardsContainer>
+        <SwipeButtonContainer>
+          <Button
+            onPress={() => { this.forceSwipe(LEFT); }}
+            title="No"
+            color="red"
+          />
+          <Button
+            onPress={() => { this.forceSwipe(RIGHT); }}
+            title="Yes"
+            color="green"
+          />
+        </SwipeButtonContainer>
       </CenterView>
     );
   }

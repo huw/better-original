@@ -31,8 +31,11 @@ export default class Card extends React.Component<CardData> {
         <Image
           source={images[value]}
         />
-        <Text>
-          {value.charAt(0).toUpperCase() + value.slice(1)}
+        <Text style={{ fontSize: 15 }}>
+          {'\n'}
+        </Text>
+        <Text style={{ fontSize: 35, fontWeight: 'bold' }}>
+          {value.charAt(0).toLowerCase() + value.slice(1)}
         </Text>
       </PrettyCard>
     );

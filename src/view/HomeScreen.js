@@ -20,26 +20,21 @@ type Props = {
 export default class HomeScreen extends React.Component<Props> {
   constructor(props) {
     super(props);
-    this.state = {
-      isPreSession: this.props.navigation.getParam('isPreSession', true),
-    };
   }
 
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
     navigate('Mood', {
-      isPreSession: this.state.isPreSession,
+      isPreSession: true,
     });
   }
 
   render() {
-    this.state.isPreSession = this.props.navigation.getParam('isPreSession', true);
-    console.log('HomeScreen: '.concat(this.state.isPreSession));
     return (
       <CenterView>
         <Button
           onPress={this.onPressButton}
-          title={this.state.isPreSession ? 'Start Session' : 'End Session'}
+          title="Start Session"
           color="#000"
         />
       </CenterView>
