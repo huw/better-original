@@ -62,13 +62,10 @@ export default class MoodScreen extends React.Component<Props> {
     this.SwipeCards = React.createRef();
   }
 
-<<<<<<< HEAD
-=======
   onPressButton = (params) => {
     this.props.navigation.navigate('Home', params);
   }
 
->>>>>>> master
   onYes = (card: CardData) => {
     console.log(`I am ${card.value}`);
     this.setState((prevState => ({
@@ -134,7 +131,6 @@ export default class MoodScreen extends React.Component<Props> {
             handleYup={this.onYes}
             handleNope={this.onNo}
 
-<<<<<<< HEAD
             dragY={false}
           />
         </SwipeCardsContainer>
@@ -150,20 +146,6 @@ export default class MoodScreen extends React.Component<Props> {
             color="green"
           />
         </SwipeButtonContainer>
-=======
-          dragY={false}
-        />
-        {/* <Button
-          onPress={this.forceSwipe(LEFT)}
-          title="No"
-          color="red"
-        />
-        <Button
-          onPress={this.forceSwipe(RIGHT)}
-          title="Yes"
-          color="green"
-        /> */}
->>>>>>> master
       </CenterView>
     );
   }
