@@ -99,10 +99,11 @@ export default class HomeScreen extends React.Component<Props> {
 
       }
       
-      console.log(`before positive after negavtive ${befPosAftNeg}`);
-      console.log(`before negative after positive ${befNegAftPos}`);
+      //console.log(`before positive after negavtive ${befPosAftNeg}`);
+      //console.log(`before negative after positive ${befNegAftPos}`);
 
       let testStatistic = (befNegAftPos - befPosAftNeg)^2/(befNegAftPos + befPosAftNeg);
+      console.log(`Test Statistic ${testStatistic}`);
 
     })
 
