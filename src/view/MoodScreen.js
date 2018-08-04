@@ -17,7 +17,7 @@ const RIGHT = 'right';
 const CenterView = styled.View`
   flex: 1;
   background-color: ${styles.backgroundColor};
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -115,7 +115,7 @@ export default class MoodScreen extends React.Component<Props> {
         </HintText>
         <SwipeCards
           cards={this.state.cards}
-          renderCard={(cardProps: Feeling) => <Card {...cardProps} />}
+          renderCard={(cardProps: Feeling) => <Card key={cardProps.value} {...cardProps} />}
           renderNoMoreCards={this.noMoreCards}
 
           showYup={false}
