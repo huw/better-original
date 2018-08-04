@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button } from 'react-native';
+import { Button, Text } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 
 import Card from './../components/Card.js';
@@ -31,6 +31,7 @@ export default class MoodScreen extends React.Component {
         { text: '😌', value: 'relaxed', backgroundColor: '#9d63e8'},
         { text: '😴', value: 'sleepy', backgroundColor: '#dda73b'},
       ],
+      feelings: [],
     };
   }
 
@@ -40,11 +41,22 @@ export default class MoodScreen extends React.Component {
   }
 
   onYes = (card) => {
-    console.log(`I am ${card.value}`)
+    console.log(`I am ${card.value}`);
+    this.state.feelings.push(card.value);
   }
 
   onNo = (card) => {
-    console.log(`I am not ${card.value}`)
+    console.log(`I am not ${card.value}`);
+  }
+
+  noMoreCards = () => {
+    var allFeelings = this.state.feelings.join('\n');
+    return (
+      <Text style={{ fontSize: 20 }}>
+        <Text style={{ fontWeight: 'bold' }}>You Are:{'\n'}</Text>
+        {allFeelings}
+      </Text>
+    );
   }
 
   render() {
@@ -59,6 +71,7 @@ export default class MoodScreen extends React.Component {
         <SwipeCards
           cards={this.state.cards}
           renderCard={cardProps => <Card {...cardProps} />}
+          renderNoMoreCards={this.noMoreCards}
 
           handleYup={this.onYes}
           handleNope={this.onNo}
