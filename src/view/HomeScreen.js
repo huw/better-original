@@ -33,9 +33,8 @@ export default class HomeScreen extends React.Component<Props> {
     super(props);
     AsyncStorage.setItem('moods', JSON.stringify(moods));
     AsyncStorage.setItem('meditations', JSON.stringify(meditations));
-    this.state = {
-      chiSquaredTest: this.stats(),
-    };
+    this.state = {};
+    this.stats();
   }
 
   onPressButton = () => {
@@ -113,23 +112,36 @@ export default class HomeScreen extends React.Component<Props> {
 
       let testStatistic = ((befNegAftPos - befPosAftNeg)^2) / (befNegAftPos + befPosAftNeg);
       console.log(`Test Statistic ${testStatistic}`);
+      let msg;
+      if (testStatistic < 0.001) {
+        msg = "No Observed Effects";
+      } else if (testStatistic < 0.05 && befNegAftPos > befPosAftNeg) {
+        msg = "Slight Positive Effects";
+      } else if (testStatistic < 0.05) {
+        msg = "Slight Negative Effects";
+      } else if (befNegAftPos > befPosAftNeg) {
+        msg = "Great Positive Effects";
+      } else {
+        msg = "No Improvements"
+      }
+      this.setState({
+        chiSquaredMsg: "Status: " + msg,
+      });
 
     })
 
   }
 
- 
-
   render() {
     return (
       <CenterView>
+        <Text>
+          {this.state && this.state.chiSquaredMsg}
+        </Text>
         <Button
           onPress={this.onPressButton}
           title="Start Session"
         />
-        <Text style={{ color: 'white' }}>
-          {this.state.chiSquaredTest}
-        </Text>
       </CenterView>
     );
   }
