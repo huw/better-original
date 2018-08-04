@@ -11,5 +11,6 @@ module.exports = {
     'react/jsx-filename-extension': 'off',
     'class-methods-use-this': 'off',
     'no-unused-vars': 'off',
+    'linebreak-style': 'off',
   },
 };
