@@ -5,7 +5,7 @@ const images = {
   'grateful': require('./grateful.png'),
   'insecure': require('./insecure.png'),
   'motivated': require('./motivated.png'),
-  'romantic': require('./romantic.png'),
+  'loved': require('./loved.png'),
   'tired': require('./tired.png'),
   'annoyed': require('./annoyed.png'),
   'calm': require('./calm.png'),
