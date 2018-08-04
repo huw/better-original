@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Text, AsyncStorage } from 'react-native';
+import { Text, StatusBar, AsyncStorage } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import { Container, Content } from 'native-base';
+import _ from 'lodash';
 
 import styles from '../constants/styles';
 import feelings, { type Feeling } from '../constants/feelings';
@@ -16,13 +17,13 @@ const RIGHT = 'right';
 const CenterView = styled.View`
   flex: 1;
   background-color: ${styles.backgroundColor};
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 `;
 
 const HintText = styled.Text`
   position: absolute;
-  top: 20;
+  top: 80;
   font-size: ${styles.fontSizeHint};
   font-weight: ${styles.fontWeightHint};
   color: ${styles.textColorHint};
@@ -39,7 +40,7 @@ export default class MoodScreen extends React.Component<Props> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      cards: feelings,
+      cards: _.shuffle(feelings),
       amFeeling: [],
       notFeeling: [],
     };
@@ -108,18 +109,20 @@ export default class MoodScreen extends React.Component<Props> {
   render() {
     return (
       <CenterView>
+        <StatusBar barStyle="light-content"/>
         <HintText>
           swipe left for no, swipe right for yes
         </HintText>
         <SwipeCards
           cards={this.state.cards}
-          renderCard={(cardProps: Feeling) => <Card {...cardProps} />}
+          renderCard={(cardProps: Feeling) => <Card key={cardProps.value} {...cardProps} />}
           renderNoMoreCards={this.noMoreCards}
 
           showYup={false}
           showNope={false}
           handleYup={this.onYes}
           handleNope={this.onNo}
+          onClickHandler={null}
 
           dragY={false}
         />

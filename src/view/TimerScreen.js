@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, Text, StatusBar, AsyncStorage } from 'react-native';
 import styled from 'styled-components';
 import moment from 'moment';
 
@@ -10,6 +10,7 @@ const Container = styled.View`
   flex: 1;
   background-color: ${styles.backgroundColor};
   justify-content: center;
+  align-items: center;
 `;
 
 const TimeText = styled.Text`
@@ -63,6 +64,7 @@ export default class TimerScreen extends React.Component<Props> {
   render() {
     return (
       <Container>
+        <StatusBar barStyle="light-content"/>
         <TimeText>{moment(this.state.time).format('mm:ss')}</TimeText>
         <Button
           onPress={this.onPressButton}

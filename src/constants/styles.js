@@ -1,5 +1,6 @@
 export const buttonStyle = {
-  textColor: 'white',
+  textColor: 'rgba(255, 255, 255, 0.8)',
+  backgroundColor: '#445D79',
   fontSize: '24',
   fontWeight: '600',
   paddingHorizontal: '16',

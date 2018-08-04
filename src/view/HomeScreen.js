@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Text, AsyncStorage } from 'react-native';
+import { Text, StatusBar, AsyncStorage } from 'react-native';
 
 import styles from '../constants/styles';
 import Button from '../components/Button';
@@ -55,6 +55,7 @@ export default class HomeScreen extends React.Component<Props> {
 
     return (
       <CenterView>
+        <StatusBar barStyle="light-content"/>
         <Button
           onPress={this.onPressButton}
           title="Start Session"
