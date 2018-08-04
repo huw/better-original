@@ -7,22 +7,22 @@ export type Feeling = {
 export default [
   {
     value: 'happy',
-    description: 'you feel joyfull,\n people would notice an uplifting spirit',
+    description: 'you feel joyful,\npeople would notice an uplifting spirit',
     backgroundColor: '#447953',
   },
   {
     value: 'sad',
-    description: 'not too sure what to write',
+    description: 'you are upset,\nnot merely empty or deflated',
     backgroundColor: '#445D79',
   },
   {
     value: 'relaxed',
-    description: 'you\'ve slept well,\n your muscles aren\'t tense,\n you don\'t have to be happy',
+    description: 'you\'ve slept well,\nyour muscles aren\'t tense,\nyou don\'t have to be happy',
     backgroundColor: '#794479',
   },
   {
     value: 'tired',
-    description: 'your eyes may be heavy ,\n you want to be in bed,',
+    description: 'your eyes may be heavy ,\nyou want to be in bed,',
     backgroundColor: '#444479',
   },
   // {
