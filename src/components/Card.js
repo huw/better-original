@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Text, Image } from 'react-native';
 
@@ -15,11 +14,12 @@ const PrettyCard = styled.View`
   box-shadow: 5px 10px #888888;
 `;
 
-export default class Card extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+export type CardData = {
+  value: string,
+  backgroundColor: string,
+};
 
+export default class Card extends React.Component<CardData> {
   render() {
     const path = `../images/${this.props.value}.png`;
     console.log(path);

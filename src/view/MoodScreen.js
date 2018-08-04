@@ -1,11 +1,10 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button, Text } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 
-import Card from '../components/Card';
+import Card, { type CardData } from '../components/Card';
 
 const LEFT = 'left';
 const RIGHT = 'right';
@@ -21,11 +20,6 @@ type Props = {
   navigation: {
     navigate: (string) => mixed,
   },
-};
-
-type CardData = {
-  value: string,
-  backgroundColor: string,
 };
 
 export default class MoodScreen extends React.Component<Props> {
