@@ -14,8 +14,8 @@ const CenterView = styled.View`
 type Props = {
   navigation: {
     navigate: (string) => mixed,
-  }
-}
+  },
+};
 
 export default class HomeScreen extends React.Component<Props> {
   onPressButton = () => {

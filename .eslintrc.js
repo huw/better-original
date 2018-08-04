@@ -9,7 +9,8 @@ module.exports = {
   ],
   rules: {
     'react/jsx-filename-extension': 'off',
-    'react/no-multi-comp',
+    'react/destructuring-assignment': 'off',
+    'react/jsx-one-expression-per-line': 'off',
     'class-methods-use-this': 'off',
     'no-unused-vars': 'off',
     'linebreak-style': 'off',

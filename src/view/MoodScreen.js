@@ -5,7 +5,10 @@ import styled from 'styled-components';
 import { Button, Text } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 
-import Card from './../components/Card.js';
+import Card from '../components/Card';
+
+const LEFT = 'left';
+const RIGHT = 'right';
 
 const CenterView = styled.View`
   flex: 1;
@@ -14,21 +17,25 @@ const CenterView = styled.View`
   justify-content: center;
 `;
 
-export default class MoodScreen extends React.Component {
+type Props = {
+  navigation: {
+    navigate: (string) => mixed,
+  },
+};
 
-  static propTypes = {
-    navigation: PropTypes.shape({
-      navigate: PropTypes.func.isRequired,
-    }).isRequired,
-  }
+type CardData = {
+  value: string,
+  backgroundColor: string,
+};
 
+export default class MoodScreen extends React.Component<Props> {
   constructor(props) {
     super(props);
     this.state = {
       cards: [
         { value: 'happy', backgroundColor: '#0ad14f' },
         { value: 'sad', backgroundColor: '#2357aa' },
-        { value: 'relaxed', backgroundColor: '#9d63e8'},
+        { value: 'relaxed', backgroundColor: '#9d63e8' },
         { value: 'tired', backgroundColor: '#4a4287' },
         { value: 'anxious', backgroundColor: '#42f456' },
         { value: 'annoyed', backgroundColor: '#ff0000' },
@@ -49,27 +56,36 @@ export default class MoodScreen extends React.Component {
   }
 
   onPressButton = () => {
-    const { navigation: { navigate } } = this.props;
-    navigate('Home');
+    this.props.navigation.navigate('Home');
   }
 
-  onYes = (card) => {
+  onYes = (card: CardData) => {
     console.log(`I am ${card.value}`);
-    this.state.feelings.push(card.value);
+    this.setState((prevState => ({
+      feelings: [...prevState.feelings, card.value],
+    })));
   }
 
-  onNo = (card) => {
+  onNo = (card: CardData) => {
     console.log(`I am not ${card.value}`);
   }
 
   noMoreCards = () => {
-    var allFeelings = this.state.feelings.join('\n');
+    const allFeelings = this.state.feelings.join('\n');
     return (
       <Text style={{ fontSize: 20, color: 'white' }}>
         <Text style={{ fontWeight: 'bold' }}>You Are:{'\n'}</Text>
         {allFeelings}
       </Text>
     );
+  }
+
+  forceSwipe = (direction: string) => {
+    if (direction === LEFT) {
+      this.SwipeCards._forceLeftSwipe(); // eslint-disable-line no-underscore-dangle
+    } else if (direction === RIGHT) {
+      this.SwipeCards._forceRightSwipe(); // eslint-disable-line no-underscore-dangle
+    }
   }
 
   render() {
@@ -83,7 +99,7 @@ export default class MoodScreen extends React.Component {
         <SwipeCards
           ref={this.SwipeCards}
           cards={this.state.cards}
-          renderCard={cardProps => <Card {...cardProps} />}
+          renderCard={(cardProps: CardData) => <Card {...cardProps} />}
           renderNoMoreCards={this.noMoreCards}
 
           showYup={false}
@@ -91,18 +107,15 @@ export default class MoodScreen extends React.Component {
           handleYup={this.onYes}
           handleNope={this.onNo}
 
-          yupText="Yes"
-          nopeText="No"
-
           dragY={false}
         />
         <Button
-          onPress={() => {this.SwipeCards._forceLeftSwipe()}}
+          onPress={this.forceSwipe(LEFT)}
           title="No"
           color="red"
         />
         <Button
-          onPress={() => {this.SwipeCards._forceLeftSwipe()}}
+          onPress={this.forceSwipe(RIGHT)}
           title="Yes"
           color="green"
         />
