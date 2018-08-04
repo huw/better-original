@@ -111,12 +111,9 @@ export default class HomeScreen extends React.Component<Props> {
           
         }
 
-      }
-      
-      //console.log(`before positive after negavtive ${befPosAftNeg}`);
-      //console.log(`before negative after positive ${befNegAftPos}`);
+      } 
 
-      let testStatistic = ((befNegAftPos - befPosAftNeg)^2) / (befNegAftPos + befPosAftNeg);
+      let testStatistic = ((befNegAftPos - befPosAftNeg)*(befNegAftPos - befPosAftNeg)) / (befNegAftPos + befPosAftNeg);
       console.log(`Test Statistic ${testStatistic}`);
       let msg;
       if (testStatistic < 0.001) {
@@ -132,6 +129,8 @@ export default class HomeScreen extends React.Component<Props> {
       }
       this.setState({
         chiSquaredMsg: "Status: " + msg,
+        positiveChange: prePositiveNotHave.filter(emotion => postPositiveHave.includes(emotion)),
+        negativeChange: preNegativeHave.filter(emotion => postNegativeNotHave.includes(emotion)),
       });
 
     })
