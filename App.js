@@ -8,12 +8,24 @@ import TimerScreen from './src/view/TimerScreen';
 const App = createStackNavigator({
   Home: {
     screen: HomeScreen,
+    navigationOptions: {
+      header: null,
+      gesturesEnabled: false,
+    },
   },
   Mood: {
     screen: MoodScreen,
+    navigationOptions: {
+      header: null,
+      gesturesEnabled: false,
+    },
   },
   Timer: {
     screen: TimerScreen,
+    navigationOptions: {
+      header: null,
+      gesturesEnabled: false,
+    },
   },
 });
 

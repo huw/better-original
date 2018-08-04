@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Text, AsyncStorage } from 'react-native';
+import { Text, StatusBar, AsyncStorage } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import { Container, Content } from 'native-base';
 
@@ -22,7 +22,7 @@ const CenterView = styled.View`
 
 const HintText = styled.Text`
   position: absolute;
-  top: 20;
+  top: 80;
   font-size: ${styles.fontSizeHint};
   font-weight: ${styles.fontWeightHint};
   color: ${styles.textColorHint};
@@ -108,6 +108,7 @@ export default class MoodScreen extends React.Component<Props> {
   render() {
     return (
       <CenterView>
+        <StatusBar barStyle="light-content"/>
         <HintText>
           swipe left for no, swipe right for yes
         </HintText>
@@ -120,6 +121,7 @@ export default class MoodScreen extends React.Component<Props> {
           showNope={false}
           handleYup={this.onYes}
           handleNope={this.onNo}
+          onClickHandler={null}
 
           dragY={false}
         />
