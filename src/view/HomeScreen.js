@@ -28,6 +28,16 @@ type Props = {
 
 
 export default class HomeScreen extends React.Component<Props> {
+
+  constructor(props) {
+    super(props);
+    AsyncStorage.setItem('moods', JSON.stringify(moods));
+    AsyncStorage.setItem('meditations', JSON.stringify(meditations));
+    this.state = {
+      chiSquaredTest: this.stats(),
+    };
+  }
+
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
     AsyncStorage.getItem('meditation', (err, result) => {
@@ -71,7 +81,7 @@ export default class HomeScreen extends React.Component<Props> {
         let negativeWordsNotHave = table[i].notMoods.filter(emotion => badEmotions.includes(emotion));
 
         // check if the data is pre or post session
-        if(table[i].isPreSession) {
+        if (table[i].isPreSession) {
           
           // get the positive and negative moods before the session
           prePositiveHave = positiveWordsHave;
@@ -79,8 +89,7 @@ export default class HomeScreen extends React.Component<Props> {
           prePositiveNotHave = positiveWordsNotHave;
           preNegativeNotHave = negativeWordsNotHave;
 
-          
-        } else{
+        } else {
           
           // get the negative words
           postPositiveHave = positiveWordsHave;
@@ -89,11 +98,11 @@ export default class HomeScreen extends React.Component<Props> {
           postNegativeNotHave = negativeWordsNotHave;
 
           // compute the before negative/after positive and the before positive -- after negative
-          befPosAftNeg = befPosAftNeg + prePositiveHave.filter(emotion => postPositiveNotHave.includes(emotion)).length;
-          befPosAftNeg = befPosAftNeg + preNegativeNotHave.filter(emotion => postNegativeHave.includes(emotion)).length;
+          befPosAftNeg += prePositiveHave.filter(emotion => postPositiveNotHave.includes(emotion)).length;
+          befPosAftNeg += preNegativeNotHave.filter(emotion => postNegativeHave.includes(emotion)).length;
 
-          befNegAftPos = befNegAftPos + prePositiveNotHave.filter(emotion => postPositiveHave.includes(emotion)).length;
-          befNegAftPos = befNegAftPos + preNegativeHave.filter(emotion => postNegativeNotHave.includes(emotion)).length;
+          befNegAftPos += prePositiveNotHave.filter(emotion => postPositiveHave.includes(emotion)).length;
+          befNegAftPos += preNegativeHave.filter(emotion => postNegativeNotHave.includes(emotion)).length;
           
         }
 
@@ -102,7 +111,7 @@ export default class HomeScreen extends React.Component<Props> {
       //console.log(`before positive after negavtive ${befPosAftNeg}`);
       //console.log(`before negative after positive ${befNegAftPos}`);
 
-      let testStatistic = (befNegAftPos - befPosAftNeg)^2/(befNegAftPos + befPosAftNeg);
+      let testStatistic = ((befNegAftPos - befPosAftNeg)^2) / (befNegAftPos + befPosAftNeg);
       console.log(`Test Statistic ${testStatistic}`);
 
     })
@@ -112,17 +121,15 @@ export default class HomeScreen extends React.Component<Props> {
  
 
   render() {
-    AsyncStorage.setItem('moods', JSON.stringify(moods));
-    AsyncStorage.setItem('meditations', JSON.stringify(meditations));
-
-    this.stats();
-
     return (
       <CenterView>
         <Button
           onPress={this.onPressButton}
           title="Start Session"
         />
+        <Text style={{ color: 'white' }}>
+          {this.state.chiSquaredTest}
+        </Text>
       </CenterView>
     );
   }
