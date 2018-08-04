@@ -22,6 +22,9 @@ type Props = {
   },
 };
 
+const medTimes = [
+  {session: 1, time: 10001}, 76637, 89981, 99381, 17374, 12344, 99192];   // fake meditation times in msec
+
 export default class HomeScreen extends React.Component<Props> {
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
@@ -47,6 +50,9 @@ export default class HomeScreen extends React.Component<Props> {
   }
 
   render() {
+    AsyncStorage.setItem('moods', JSON.stringify(moods));
+    AsyncStorage.setItem('meditations', JSON.stringify(meditations));
+
     return (
       <CenterView>
         <Button
