@@ -137,9 +137,9 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   onYes = (card: CardData) => {
-    this.setState((prevState => ({
+    this.setState(prevState => ({
       amFeeling: [...prevState.amFeeling, card.value],
-    })));
+    }));
   }
 
   onNo = (card: CardData) => {
@@ -159,6 +159,7 @@ export default class MoodScreen extends React.Component<Props> {
         date: new Date(),
         isPreSession: isPreSessionParam,
         moods: this.state.amFeeling,
+        notMoods: this.state.notFeeling,
       };
       if (table) {
         table = [...table, newMood];
@@ -172,7 +173,6 @@ export default class MoodScreen extends React.Component<Props> {
       AsyncStorage.getItem('meditation', (errM, resultM) => {
         if (errM) throw errM;
         const tableM = JSON.parse(resultM);
-        console.log(tableM);
         console.log(currentMeditationID);
         if (isPreSessionParam) {
           tableM.find(obj => obj.ID === currentMeditationID).preSessionID = moodID;
