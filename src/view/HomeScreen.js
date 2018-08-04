@@ -6,7 +6,7 @@ import { Button } from 'react-native';
 
 const CenterView = styled.View`
   flex: 1;
-  background-color: #a816af;
+  background-color: #ffffff;
   align-items: center;
   justify-content: center;
 `;

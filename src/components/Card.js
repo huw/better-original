@@ -2,15 +2,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Text, View } from 'react-native';
-import SwipeCards from 'react-native-swipe-cards';
 
 const PrettyCard = styled.View`
   justify-content: center;
   align-items: center;
   width: 300;
   height: 300;
+  border-radius: 15px;
+  overflow: visible;
   background-color: ${props => props.backgroundColor};
+`;
+
+const CardText = styled.Text`
+  font-size: 100px;
 `;
 
 export default class Card extends React.Component {
@@ -23,9 +27,9 @@ export default class Card extends React.Component {
       <PrettyCard
         backgroundColor={this.props.backgroundColor}
       >
-        <Text>
+        <CardText>
           {this.props.text}
-        </Text>
+        </CardText>
       </PrettyCard>
     );
   }
