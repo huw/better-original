@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const images = {
   'angry': require('./angry.png'),
   'anxious': require('./anxious.png'),
@@ -5,7 +7,7 @@ const images = {
   'grateful': require('./grateful.png'),
   'insecure': require('./insecure.png'),
   'motivated': require('./motivated.png'),
-  'romantic': require('./romantic.png'),
+  'loved': require('./loved.png'),
   'tired': require('./tired.png'),
   'annoyed': require('./annoyed.png'),
   'calm': require('./calm.png'),
@@ -13,7 +15,7 @@ const images = {
   'happy': require('./happy.png'),
   'inspired': require('./inspired.png'),
   'relaxed': require('./relaxed.png'),
-  'sad': require('./sad.png')
-}
+  'sad': require('./sad.png'),
+};
 
 export default images;

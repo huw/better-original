@@ -1,11 +1,16 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Button, AsyncStorage } from 'react-native';
+import { Text, AsyncStorage } from 'react-native';
+
+import styles from '../constants/styles';
+import Button from '../components/Button';
+
+import { moods, meditations } from '../../sampleData';
 
 const CenterView = styled.View`
   flex: 1;
-  background-color: #686b70;
+  background-color: ${styles.backgroundColor};
   align-items: center;
   justify-content: center;
 `;
@@ -18,15 +23,26 @@ type Props = {
 };
 
 export default class HomeScreen extends React.Component<Props> {
-  
-  constructor(props) {
-    super(props);
-  }
-
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
-    navigate('Mood', {
-      isPreSession: true,
+    AsyncStorage.getItem('meditation', (err, result) => {
+      if (err) throw err;
+      let table = JSON.parse(result);
+
+      const currentMeditationID = table ? table.length : 0;
+      navigate('Mood', {
+        isPreSession: true,
+        meditationID: currentMeditationID,
+      });
+      const meditation = {
+        ID: currentMeditationID,
+      };
+      if (table) {
+        table = [...table, meditation];
+      } else {
+        table = [meditation];
+      }
+      AsyncStorage.setItem('meditation', JSON.stringify(table));
     });
   }
 
@@ -36,7 +52,6 @@ export default class HomeScreen extends React.Component<Props> {
         <Button
           onPress={this.onPressButton}
           title="Start Session"
-          color="#000"
         />
       </CenterView>
     );
