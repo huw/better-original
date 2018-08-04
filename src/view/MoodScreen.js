@@ -67,9 +67,9 @@ export default class MoodScreen extends React.Component<Props> {
 
   noMoreCards = () => {
     const allFeelings = this.state.feelings.join('\n');
-    let newMood = {
+    const newMood = {
       date: new Date(),
-      moods: this.state.amFeeling
+      moods: this.state.amFeeling,
     };
     AsyncStorage.getItem('mood', (err, result) => {
       if (err) throw err;

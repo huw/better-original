@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Text, Image } from 'react-native';
 
-import images from './../images/images.js';
+import images from '../images/images';
 
 const PrettyCard = styled.View`
   justify-content: center;
@@ -23,7 +23,7 @@ export type CardData = {
 
 export default class Card extends React.Component<CardData> {
   render() {
-    let value = this.props.value;
+    const { value } = this.props;
     return (
       <PrettyCard
         backgroundColor={this.props.backgroundColor}
