@@ -67,6 +67,7 @@ export default class MoodScreen extends React.Component<Props> {
     this.state.notFeeling.push(card.value);
   }
 
+  
   noMoreCards = () => {
     const allFeelings = this.state.amFeeling.join('\n');
     const newMood = {
@@ -87,13 +88,26 @@ export default class MoodScreen extends React.Component<Props> {
       console.log(table);
     });
     console.log('End of log: '.concat(this.state.isPreSession));
-    return (
+    
+    if (this.state.isPreSession) {
+      this.state.isPreSession = !this.state.isPreSession;
+      return (
+        <Button
+          onPress={() => this.props.navigation.navigate('Timer')}
+          title="DONE"
+          color="black"
+        />
+      );
+    } else {
+      return (
       <Button
-        onPress={() => this.props.navigation.navigate('Home', { isPreSession: !this.state.isPreSession })}
-        title="DONE"
-        color="black"
-      />
+          onPress={() => this.props.navigation.navigate('Home')}
+          title="DONE"
+          color="black"
+        />
     );
+    }
+
   }
 
   forceSwipe = (direction: string) => {
@@ -140,3 +154,4 @@ export default class MoodScreen extends React.Component<Props> {
     );
   }
 }
+
