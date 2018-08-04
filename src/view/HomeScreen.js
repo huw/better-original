@@ -18,14 +18,26 @@ type Props = {
 };
 
 export default class HomeScreen extends React.Component<Props> {
-  constructor(props) {
-    super(props);
-  }
-
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
-    navigate('Mood', {
-      isPreSession: true,
+    AsyncStorage.getItem('meditation', (err, result) => {
+      if (err) throw err;
+      let table = JSON.parse(result);
+
+      const currentMeditationID = table ? table.length : 0;
+      navigate('Mood', {
+        isPreSession: true,
+        meditationID: currentMeditationID,
+      });
+      const meditation = {
+        ID: currentMeditationID,
+      };
+      if (table) {
+        table = [...table, meditation];
+      } else {
+        table = [meditation];
+      }
+      AsyncStorage.setItem('meditation', JSON.stringify(table));
     });
   }
 

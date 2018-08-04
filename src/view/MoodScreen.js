@@ -78,17 +78,19 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   noMoreCards = () => {
-    const isPreSession = this.props.navigation.getParam('isPreSession', true);
+    const isPreSessionParam = this.props.navigation.getParam('isPreSession', true);
+    const currentMeditationID = this.props.navigation.getParam('meditationID', null);
     const allFeelings = this.state.amFeeling.join('\n');
-    const newMood = {
-      date: new Date(),
-      isPreSession: this.isPreSession,
-      moods: this.state.amFeeling,
-    };
     AsyncStorage.getItem('mood', (err, result) => {
       if (err) throw err;
       let table = JSON.parse(result);
-
+      const moodID = table ? table.length : 0;
+      const newMood = {
+        ID: moodID,
+        date: new Date(),
+        isPreSession: isPreSessionParam,
+        moods: this.state.amFeeling,
+      };
       if (table) {
         table = [...table, newMood];
       } else {
@@ -96,11 +98,28 @@ export default class MoodScreen extends React.Component<Props> {
       }
       AsyncStorage.setItem('mood', JSON.stringify(table));
       console.log(table);
+
+      AsyncStorage.getItem('meditation', (errM, resultM) => {
+        if (errM) throw errM;
+        const tableM = JSON.parse(resultM);
+        console.log(tableM);
+        console.log(currentMeditationID);
+        if (isPreSessionParam) {
+          tableM.find(obj => obj.ID === currentMeditationID).preSessionID = moodID;
+        } else {
+          tableM.find(obj => obj.ID === currentMeditationID).postSessionID = moodID;
+        }
+        AsyncStorage.setItem('meditation', JSON.stringify(tableM));
+        console.log(tableM);
+      });
     });
 
     return (
       <Button
-        onPress={() => this.props.navigation.navigate(isPreSession ? 'Timer' : 'Home')}
+        onPress={() => this.props.navigation.navigate(
+          isPreSession ? 'Timer' : 'Home',
+          { meditationID: currentMeditationID },
+        )}
         title="DONE"
         color="black"
       />
