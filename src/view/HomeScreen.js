@@ -6,6 +6,8 @@ import { Text, StatusBar, AsyncStorage } from 'react-native';
 import styles from '../constants/styles';
 import Button from '../components/Button';
 
+import { moods, meditations } from '../../sampleData';
+
 const CenterView = styled.View`
   flex: 1;
   background-color: ${styles.backgroundColor};
