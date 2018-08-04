@@ -22,7 +22,7 @@ export default class Card extends React.Component {
 
   render() {
     const path = `../images/${this.props.value}.png`;
-    console.log(path);
+    // console.log(path);
     return (
       <PrettyCard
         backgroundColor={this.props.backgroundColor}
