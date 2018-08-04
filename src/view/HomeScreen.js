@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Button } from 'react-native';
 
@@ -14,8 +13,8 @@ const CenterView = styled.View`
 type Props = {
   navigation: {
     navigate: (string) => mixed,
-  }
-}
+  },
+};
 
 export default class HomeScreen extends React.Component<Props> {
   onPressButton = () => {

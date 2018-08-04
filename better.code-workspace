@@ -19,6 +19,9 @@
 		"editor.formatOnPaste": false,
     "editor.formatOnType": false,
 		"editor.formatOnSave": false,
+		"javascript.validate.enable": false,
+		"typescript.validate.enable": false,
+		"flow.useNPMPackagedFlow": true,
 	},
 	"launch": {
 		"version": "0.2.0",
