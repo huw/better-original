@@ -1,49 +1,24 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Button,
-  StyleSheet,
-  AsyncStorage,
-} from 'react-native';
+import { View, Text, AsyncStorage } from 'react-native';
+import styled from 'styled-components';
 import moment from 'moment';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  header: {
-    borderBottomWidth: 0.5,
-    paddingTop: 20,
-    paddingBottom: 10,
-    backgroundColor: '#00FF00',
-  },
-  title: {
-    alignSelf: 'center',
-    fontWeight: '600',
-  },
-  timerWrapper: {
-    backgroundColor: '#FFFFFF',
-  },
-  top: {
-    flex: 1,
-  },
-  bottom: {
-    flex: 2,
-    backgroundColor: '#F0EFF5',
-  },
-  mainTimer: {
-    fontSize: 60,
-    fontWeight: '100',
-    borderWidth: 0.5,
-    alignSelf: 'center',
-  },
-  /* LapTimer: {
-    fontSize: 18,
-    borderWidth: 0.5,
-    alignSelf: 'center',
-  }, */
-});
+import styles, { timerStyle } from '../constants/styles';
+import Button from '../components/Button';
+
+const Container = styled.View`
+  flex: 1;
+  background-color: ${styles.backgroundColor};
+  justify-content: center;
+`;
+
+const TimeText = styled.Text`
+  font-size: ${timerStyle.fontSize};
+  font-weight: ${timerStyle.fontWeight};
+  color: ${timerStyle.textColor};
+  align-self: center;
+  margin-bottom: 32;
+`;
 
 type Props = {
   navigation: {
@@ -87,14 +62,13 @@ export default class TimerScreen extends React.Component<Props> {
 
   render() {
     return (
-      <View>
-        <Text style={styles.mainTimer}>{moment(this.state.time).format('mm:ss')}</Text>
+      <Container>
+        <TimeText>{moment(this.state.time).format('mm:ss')}</TimeText>
         <Button
           onPress={this.onPressButton}
           title="Done"
-          color="#000"
         />
-      </View>
+      </Container>
     );
   }
 }
