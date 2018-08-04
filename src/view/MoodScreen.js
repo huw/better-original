@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Button, Text } from 'react-native';
+import { Button, Text, AsyncStorage } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 
 import Card from './../components/Card.js';
@@ -41,9 +41,9 @@ export default class MoodScreen extends React.Component {
         { value: 'angry', backgroundColor: '#ff2600' },
         { value: 'insecure', backgroundColor: '#d800ff' },
         { value: 'empty', backgroundColor: '#6600ff' },
-
       ],
-      feelings: [],
+      amFeeling: [],
+      notFeeling: [],
     };
     this.SwipeCards = React.createRef();
   }
@@ -55,15 +55,32 @@ export default class MoodScreen extends React.Component {
 
   onYes = (card) => {
     console.log(`I am ${card.value}`);
-    this.state.feelings.push(card.value);
+    this.state.amFeeling.push(card.value);
   }
 
   onNo = (card) => {
     console.log(`I am not ${card.value}`);
+    this.state.notFeeling.push(card.value);
   }
 
   noMoreCards = () => {
-    var allFeelings = this.state.feelings.join('\n');
+    let allFeelings = this.state.amFeeling.join('\n');
+    let newMood = {
+      date: new Date(),
+      moods: this.state.amFeeling
+    };
+    AsyncStorage.getItem('mood', (err, result) => {
+      if (err) throw err;
+      let table = JSON.parse(result);
+
+      if (table) {
+        table = [...table, newMood];
+      } else {
+        table = [newMood];
+      }
+      AsyncStorage.setItem('mood', JSON.stringify(table));
+      console.log(table);
+    });
     return (
       <Text style={{ fontSize: 20, color: 'white' }}>
         <Text style={{ fontWeight: 'bold' }}>You Are:{'\n'}</Text>
