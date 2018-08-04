@@ -19,14 +19,6 @@ const SwipeCardsContainer = styled.View`
   height: 400;
 `;
 
-const SwipeButtonContainer = styled.View`
-  /* flex: 1; */
-  height: 64;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: flex-end;
-`;
-
 type Props = {
   navigation: {
     navigate: (string) => mixed,
@@ -60,10 +52,6 @@ export default class MoodScreen extends React.Component<Props> {
     };
   }
 
-  onPressButton = (params) => {
-    this.props.navigation.navigate('Home', params);
-  }
-
   onYes = (card: CardData) => {
     this.setState((prevState => ({
       amFeeling: [...prevState.amFeeling, card.value],
@@ -76,12 +64,12 @@ export default class MoodScreen extends React.Component<Props> {
 
   noMoreCards = () => {
     const isPreSession = this.props.navigation.getParam('isPreSession', true);
-    const allFeelings = this.state.amFeeling.join('\n');
     const newMood = {
       date: new Date(),
       isPreSession: this.isPreSession,
       moods: this.state.amFeeling,
     };
+
     AsyncStorage.getItem('mood', (err, result) => {
       if (err) throw err;
       let table = JSON.parse(result);
@@ -91,8 +79,8 @@ export default class MoodScreen extends React.Component<Props> {
       } else {
         table = [newMood];
       }
+
       AsyncStorage.setItem('mood', JSON.stringify(table));
-      console.log(table);
     });
 
     return (
@@ -102,14 +90,6 @@ export default class MoodScreen extends React.Component<Props> {
         color="black"
       />
     );
-  }
-
-  forceSwipe = (direction: string) => {
-    if (direction === LEFT) {
-      // this.refSwipeCards.current._forceLeftSwipe(); // eslint-disable-line no-underscore-dangle
-    } else if (direction === RIGHT) {
-      // this.refSwipeCards.current._forceRightSwipe(); // eslint-disable-line no-underscore-dangle
-    }
   }
 
   render() {
@@ -129,18 +109,6 @@ export default class MoodScreen extends React.Component<Props> {
             dragY={false}
           />
         </SwipeCardsContainer>
-        <SwipeButtonContainer>
-          <Button
-            onPress={() => { this.forceSwipe(LEFT); }}
-            title="No"
-            color="red"
-          />
-          <Button
-            onPress={() => { this.forceSwipe(RIGHT); }}
-            title="Yes"
-            color="green"
-          />
-        </SwipeButtonContainer>
       </CenterView>
     );
   }
