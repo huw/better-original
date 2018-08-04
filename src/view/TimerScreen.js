@@ -10,6 +10,7 @@ const Container = styled.View`
   flex: 1;
   background-color: ${styles.backgroundColor};
   justify-content: center;
+  align-items: center;
 `;
 
 const TimeText = styled.Text`
