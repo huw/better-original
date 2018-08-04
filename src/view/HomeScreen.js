@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Button, AsyncStorage } from 'react-native';
 
+import { moods, meditations } from '../../sampleData';
+
 const CenterView = styled.View`
   flex: 1;
   background-color: #686b70;
