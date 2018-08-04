@@ -30,6 +30,7 @@ const SwipeButtonContainer = styled.View`
 type Props = {
   navigation: {
     navigate: (string) => mixed,
+    getParam: (string) => mixed,
   },
 };
 
@@ -42,28 +43,36 @@ export default class MoodScreen extends React.Component<Props> {
         { value: 'sad', backgroundColor: '#2357aa' },
         { value: 'relaxed', backgroundColor: '#9d63e8' },
         { value: 'tired', backgroundColor: '#4a4287' },
-        { value: 'anxious', backgroundColor: '#42f456' },
-        { value: 'annoyed', backgroundColor: '#ff0000' },
-        { value: 'romantic', backgroundColor: '#ff00ae' },
-        { value: 'calm', backgroundColor: '#0019ff' },
-        { value: 'caring', backgroundColor: '#bb00ff' },
-        { value: 'grateful', backgroundColor: '#54ff00' },
-        { value: 'inspired', backgroundColor: '#00b6ff' },
-        { value: 'motivated', backgroundColor: '#8cff00' },
-        { value: 'angry', backgroundColor: '#ff2600' },
-        { value: 'insecure', backgroundColor: '#d800ff' },
-        { value: 'empty', backgroundColor: '#6600ff' },
+        // { value: 'anxious', backgroundColor: '#42f456' },
+        // { value: 'annoyed', backgroundColor: '#ff0000' },
+        // { value: 'romantic', backgroundColor: '#ff00ae' },
+        // { value: 'calm', backgroundColor: '#0019ff' },
+        // { value: 'caring', backgroundColor: '#bb00ff' },
+        // { value: 'grateful', backgroundColor: '#54ff00' },
+        // { value: 'inspired', backgroundColor: '#00b6ff' },
+        // { value: 'motivated', backgroundColor: '#8cff00' },
+        // { value: 'angry', backgroundColor: '#ff2600' },
+        // { value: 'insecure', backgroundColor: '#d800ff' },
+        // { value: 'empty', backgroundColor: '#6600ff' },
       ],
       amFeeling: [],
       notFeeling: [],
+      isPreSession: this.props.navigation.getParam('pre', true),
     };
     this.SwipeCards = React.createRef();
   }
 
+<<<<<<< HEAD
+=======
+  onPressButton = (params) => {
+    this.props.navigation.navigate('Home', params);
+  }
+
+>>>>>>> master
   onYes = (card: CardData) => {
     console.log(`I am ${card.value}`);
     this.setState((prevState => ({
-      feelings: [...prevState.feelings, card.value],
+      amFeeling: [...prevState.amFeeling, card.value],
     })));
   }
 
@@ -73,9 +82,10 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   noMoreCards = () => {
-    const allFeelings = this.state.feelings.join('\n');
+    const allFeelings = this.state.amFeeling.join('\n');
     const newMood = {
       date: new Date(),
+      isPreSession: this.state.isPreSession,
       moods: this.state.amFeeling,
     };
     AsyncStorage.getItem('mood', (err, result) => {
@@ -90,11 +100,13 @@ export default class MoodScreen extends React.Component<Props> {
       AsyncStorage.setItem('mood', JSON.stringify(table));
       console.log(table);
     });
+    console.log('End of log: '.concat(this.state.isPreSession));
     return (
-      <Text style={{ fontSize: 20, color: 'white' }}>
-        <Text style={{ fontWeight: 'bold' }}>You Are:{'\n'}</Text>
-        {allFeelings}
-      </Text>
+      <Button
+        onPress={() => this.props.navigation.navigate('Home', { isPreSession: !this.state.isPreSession })}
+        title="DONE"
+        color="black"
+      />
     );
   }
 
@@ -107,6 +119,7 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   render() {
+    this.state.isPreSession = this.props.navigation.getParam('isPreSession', true);
     return (
       <CenterView>
         <SwipeCardsContainer>
@@ -121,6 +134,7 @@ export default class MoodScreen extends React.Component<Props> {
             handleYup={this.onYes}
             handleNope={this.onNo}
 
+<<<<<<< HEAD
             dragY={false}
           />
         </SwipeCardsContainer>
@@ -136,6 +150,20 @@ export default class MoodScreen extends React.Component<Props> {
             color="green"
           />
         </SwipeButtonContainer>
+=======
+          dragY={false}
+        />
+        {/* <Button
+          onPress={this.forceSwipe(LEFT)}
+          title="No"
+          color="red"
+        />
+        <Button
+          onPress={this.forceSwipe(RIGHT)}
+          title="Yes"
+          color="green"
+        /> */}
+>>>>>>> master
       </CenterView>
     );
   }
