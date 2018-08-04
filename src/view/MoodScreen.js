@@ -57,7 +57,6 @@ export default class MoodScreen extends React.Component<Props> {
       ],
       amFeeling: [],
       notFeeling: [],
-      isPreSession: this.props.navigation.getParam('pre', true),
     };
     this.SwipeCards = React.createRef();
   }
@@ -79,10 +78,11 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   noMoreCards = () => {
+    const isPreSession = this.props.navigation.getParam('isPreSession', true);
     const allFeelings = this.state.amFeeling.join('\n');
     const newMood = {
       date: new Date(),
-      isPreSession: this.state.isPreSession,
+      isPreSession: this.isPreSession,
       moods: this.state.amFeeling,
     };
     AsyncStorage.getItem('mood', (err, result) => {
@@ -97,10 +97,10 @@ export default class MoodScreen extends React.Component<Props> {
       AsyncStorage.setItem('mood', JSON.stringify(table));
       console.log(table);
     });
-    console.log('End of log: '.concat(this.state.isPreSession));
+
     return (
       <Button
-        onPress={() => this.props.navigation.navigate('Home')}
+        onPress={() => this.props.navigation.navigate(isPreSession ? 'Timer' : 'Home')}
         title="DONE"
         color="black"
       />
@@ -116,7 +116,6 @@ export default class MoodScreen extends React.Component<Props> {
   }
 
   render() {
-    this.state.isPreSession = this.props.navigation.getParam('isPreSession', true);
     return (
       <CenterView>
         <SwipeCardsContainer>
