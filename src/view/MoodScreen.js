@@ -5,18 +5,13 @@ import styled from 'styled-components';
 import { Button, Text, View } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 
+import Card from './../components/Card.js';
+
 const CenterView = styled.View`
   flex: 1;
   background-color: #a816af;
   align-items: center;
   justify-content: center;
-`;
-
-const Card = styled.View`
-  justify-content: 'center';
-  align-items: 'center';
-  width: 300;
-  height: 300;
 `;
 
 export default class MoodScreen extends React.Component {
@@ -31,8 +26,8 @@ export default class MoodScreen extends React.Component {
     super(props);
     this.state = {
       cards: [
-        {text: 'Happy'},
-        {text: 'Sad'}
+        { text: 'Happy', backgroundColor: '#0ad14f' },
+        { text: 'Sad', backgroundColor: '#2357aa' },
       ],
     };
   }
@@ -40,16 +35,6 @@ export default class MoodScreen extends React.Component {
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
     navigate('Home');
-  }
-
-  renderCard() {
-    return (
-      <Card>
-        <Text>
-          Card Text
-        </Text>
-      </Card>
-    );
   }
 
   render() {
@@ -63,7 +48,8 @@ export default class MoodScreen extends React.Component {
         />
         <SwipeCards
           cards={this.state.cards}
-          />
+          renderCard={cardProps => <Card {...cardProps} />}
+        />
       </CenterView>
     );
   }
