@@ -100,7 +100,7 @@ export default class MoodScreen extends React.Component<Props> {
     console.log('End of log: '.concat(this.state.isPreSession));
     return (
       <Button
-        onPress={() => this.props.navigation.navigate('Home', { isPreSession: !this.state.isPreSession })}
+        onPress={() => this.props.navigation.navigate('Home')}
         title="DONE"
         color="black"
       />

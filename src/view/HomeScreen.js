@@ -27,13 +27,13 @@ export default class HomeScreen extends React.Component<Props> {
 
   onPressButton = () => {
     const { navigation: { navigate } } = this.props;
+    this.state.isPreSession = !this.state.isPreSession;
     navigate('Mood', {
       isPreSession: this.state.isPreSession,
     });
   }
 
   render() {
-    this.state.isPreSession = this.props.navigation.getParam('isPreSession', true);
     console.log('HomeScreen: '.concat(this.state.isPreSession));
     return (
       <CenterView>
