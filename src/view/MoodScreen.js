@@ -1,8 +1,9 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Text, AsyncStorage } from 'react-native';
+import { Text, AsyncStorage } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
+import { Container, Content, Button } from 'native-base';
 
 import Card, { type CardData } from '../components/Card';
 
@@ -25,6 +26,21 @@ const SwipeButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-end;
+`;
+
+const StyledText = styled.Text`
+  color: white;
+  font-weight: bold;
+  font-size: 30;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledButton = styled(Button)`
+  width: 80;
+  height: 50;
+  justify-content: center;
+  align-items: center;
 `;
 
 type Props = {
@@ -135,16 +151,16 @@ export default class MoodScreen extends React.Component<Props> {
           />
         </SwipeCardsContainer>
         <SwipeButtonContainer>
-          <Button
-            onPress={this.forceSwipe(LEFT)}
-            title="No"
-            color="red"
-          />
-          <Button
-            onPress={this.forceSwipe(RIGHT)}
-            title="Yes"
-            color="green"
-          />
+          <StyledButton danger>
+            <StyledText>
+              No
+            </StyledText>
+          </StyledButton>
+          <StyledButton success>
+            <StyledText>
+              Yes
+            </StyledText>
+          </StyledButton>
         </SwipeButtonContainer>
       </CenterView>
     );

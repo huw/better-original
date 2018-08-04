@@ -5,6 +5,7 @@
   "dependencies": {
     "babel-eslint": "^7.0.0-beta",
     "expo": "^28.0.0",
+    "native-base": "^2.7.2",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-native": "~0.55.2",
