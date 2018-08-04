@@ -37,8 +37,8 @@ export default class HomeScreen extends React.Component<Props> {
 
   constructor(props) {
     super(props);
-    AsyncStorage.setItem('moods', JSON.stringify(moods));
-    AsyncStorage.setItem('meditations', JSON.stringify(meditations));
+    AsyncStorage.setItem('mood', JSON.stringify(moods));
+    AsyncStorage.setItem('meditation', JSON.stringify(meditations));
     this.state = {};
     this.stats();
   }
@@ -68,7 +68,7 @@ export default class HomeScreen extends React.Component<Props> {
 
 
   stats() {
-    AsyncStorage.getItem('moods', (err, result) => {
+    AsyncStorage.getItem('mood', (err, result) => {
       if (err) throw err;
       const table = JSON.parse(result);
 

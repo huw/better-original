@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Text, StatusBar, AsyncStorage } from 'react-native';
+import { Text, StatusBar, TouchableOpacity, Image, AsyncStorage } from 'react-native';
 import SwipeCards from 'react-native-swipe-cards';
 import { Container, Content } from 'native-base';
 import _ from 'lodash';
@@ -27,6 +27,11 @@ const HintText = styled.Text`
   font-size: ${styles.fontSizeHint};
   font-weight: ${styles.fontWeightHint};
   color: ${styles.textColorHint};
+`;
+
+const ExitBtn = styled.Image`
+  height: 25;
+  width: 25;
 `;
 
 type Props = {
@@ -110,6 +115,11 @@ export default class MoodScreen extends React.Component<Props> {
     return (
       <CenterView>
         <StatusBar barStyle="light-content"/>
+        <TouchableOpacity onPress={() => alert('exit now')}>
+          <ExitBtn
+            source={require('../images/X.png')}
+          />
+        </TouchableOpacity>
         <HintText>
           swipe left for no, swipe right for yes
         </HintText>
@@ -122,7 +132,7 @@ export default class MoodScreen extends React.Component<Props> {
           showNope={false}
           handleYup={this.onYes}
           handleNope={this.onNo}
-          onClickHandler={null}
+          onClickHandler={() => {}}
 
           dragY={false}
         />
