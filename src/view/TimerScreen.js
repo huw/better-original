@@ -30,13 +30,8 @@ const ButtonContainer = styled.View`
   /* flex: 1; */
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: center;
   margin-bottom: 80;
-`;
-
-const TimerButton = styled(Button)`
-  margin-right: 10px;
-  margin-left: 10px;
+  width: 210;
 `;
 
 type Props = {
@@ -98,11 +93,11 @@ export default class TimerScreen extends React.Component<Props> {
           <TimeText>{moment(this.state.time).format('mm:ss')}</TimeText>
         </TimerContainer>
         <ButtonContainer>
-          <TimerButton
+          <Button
             onPress={this.cancelSession}
             title="Cancel"
           />
-          <TimerButton
+          <Button
             onPress={this.onPressButton}
             title="Done"
           />

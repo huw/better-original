@@ -97,18 +97,15 @@ export default class MoodScreen extends React.Component<Props> {
         }
         AsyncStorage.setItem('meditation', JSON.stringify(tableM));
         console.log(tableM);
+
+        this.props.navigation.navigate(
+          isPreSessionParam ? 'Timer' : 'Home',
+          { meditationID: currentMeditationID },
+        );
       });
     });
 
-    return (
-      <Button
-        onPress={() => this.props.navigation.navigate(
-          isPreSessionParam ? 'Timer' : 'Home',
-          { meditationID: currentMeditationID },
-        )}
-        title="Done"
-      />
-    );
+    return null;
   }
 
   render() {
