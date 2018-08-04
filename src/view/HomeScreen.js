@@ -1,16 +1,13 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Text, StatusBar, AsyncStorage } from 'react-native';
-
-import styles from '../constants/styles';
-import Button from '../components/Button';
+import { Button, AsyncStorage } from 'react-native';
 
 import { moods, meditations } from '../../sampleData';
 
 const CenterView = styled.View`
   flex: 1;
-  background-color: ${styles.backgroundColor};
+  background-color: #686b70;
   align-items: center;
   justify-content: center;
 `;
@@ -47,9 +44,18 @@ export default class HomeScreen extends React.Component<Props> {
   }
 
   render() {
+    AsyncStorage.getItem('moods', (err, result) => {
+      if (err) throw err;
+      console.log(JSON.parse(result));
+    });
+
+    AsyncStorage.getItem('meditations', (err, result) => {
+      if (err) throw err;
+      console.log(JSON.parse(result));
+    });
+
     return (
       <CenterView>
-        <StatusBar barStyle="light-content"/>
         <Button
           onPress={this.onPressButton}
           title="Start Session"
