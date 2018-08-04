@@ -12,7 +12,7 @@ const RIGHT = 'right';
 
 const CenterView = styled.View`
   flex: 1;
-  background-color: white;
+  background-color: #262626;
   justify-content: space-evenly;
 `;
 
@@ -22,7 +22,7 @@ const SwipeCardsContainer = styled.View`
 
 const SwipeButtonContainer = styled.View`
   /* flex: 1; */
-  height: 64;
+  height: 10;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-end;
@@ -55,21 +55,81 @@ export default class MoodScreen extends React.Component<Props> {
     super(props);
     this.state = {
       cards: [
-        { value: 'happy', backgroundColor: '#0ad14f' },
-        { value: 'sad', backgroundColor: '#2357aa' },
-        { value: 'relaxed', backgroundColor: '#9d63e8' },
-        { value: 'tired', backgroundColor: '#4a4287' },
-        // { value: 'anxious', backgroundColor: '#42f456' },
-        // { value: 'annoyed', backgroundColor: '#ff0000' },
-        // { value: 'romantic', backgroundColor: '#ff00ae' },
-        // { value: 'calm', backgroundColor: '#0019ff' },
-        // { value: 'caring', backgroundColor: '#bb00ff' },
-        // { value: 'grateful', backgroundColor: '#54ff00' },
-        // { value: 'inspired', backgroundColor: '#00b6ff' },
-        // { value: 'motivated', backgroundColor: '#8cff00' },
-        // { value: 'angry', backgroundColor: '#ff2600' },
-        // { value: 'insecure', backgroundColor: '#d800ff' },
-        // { value: 'empty', backgroundColor: '#6600ff' },
+        {
+          value: 'happy',
+          description: 'you feel joyfull,\n people would notice an uplifting spirit',
+          backgroundColor: '#0da500',
+        },
+        {
+          value: 'sad',
+          description: 'not too sure what to write',
+          backgroundColor: '#2357aa',
+        },
+        {
+          value: 'relaxed',
+          description: 'you\'ve slept well,\n your muscles aren\'t tense,\n you don\'t have to be happy',
+          backgroundColor: '#9d63e8',
+        },
+        {
+          value: 'tired',
+          description: 'your eyes may be heavy ,\n you want to be in bed,',
+          backgroundColor: '#4a4287',
+        },
+        // {
+        //   value: 'anxious',
+        //   description: 'you are on edge ,\n worried about something that is undetermined',
+        //   backgroundColor: '#42f456',
+        // },
+        // {
+        //   value: 'annoyed',
+        //   description: 'you feel frustrated at an event ,\n put something here',
+        //   backgroundColor: '#ff0000',
+        // },
+        // {
+        //   value: 'loved',
+        //   description: 'you are content with your connection,\n you feel supported in life',
+        //   backgroundColor: '#ff00ae',
+        // },
+        // {
+        //   value: 'calm',
+        //   description: 'you don\'t have worries,\n you are physcially relaxed',
+        //   backgroundColor: '#0019ff',
+        // },
+        // {
+        //   value: 'caring',
+        //   description: 'you are feeling empathetic,\n I am not sure ',
+        //   backgroundColor: '#bb00ff',
+        // },
+        // {
+        //   value: 'grateful',
+        //   description: 'Need to put this in',
+        //   backgroundColor: '#54ff00',
+        // },
+        // {
+        //   value: 'inspired',
+        //   description: 'Need to put this in',
+        //   backgroundColor: '#00b6ff',
+        // },
+        // {
+        //   value: 'motivated',
+        //   description: 'Need to put this in',
+        //   backgroundColor: '#8cff00',
+        // },
+        // {
+        //   value: 'angry',
+        //   description: 'Need to put this in',
+        //   backgroundColor: '#ff2600',
+        // },
+        // {
+        //   value: 'insecure',
+        //   description: 'Need to put this in',
+        //   backgroundColor: '#d800ff',
+        // },
+        // {
+        //   value: 'empty',
+        //   description: 'you are lacking energy,\n you don\'t enjoy your normal hobbies',
+        //   backgroundColor: '#6600ff',
+        // },
       ],
       amFeeling: [],
       notFeeling: [],
