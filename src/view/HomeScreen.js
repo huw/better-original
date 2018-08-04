@@ -6,7 +6,7 @@ import { Button } from 'react-native';
 
 const CenterView = styled.View`
   flex: 1;
-  background-color: #a816af;
+  background-color: #686b70;
   align-items: center;
   justify-content: center;
 `;
@@ -30,7 +30,6 @@ export default class HomeScreen extends React.Component<Props> {
           onPress={this.onPressButton}
           title="Mood"
           color="#000"
-          accessibilityLabel=""
         />
       </CenterView>
     );
