@@ -11,9 +11,20 @@ const RIGHT = 'right';
 
 const CenterView = styled.View`
   flex: 1;
-  background-color: #686b70;
-  align-items: center;
-  justify-content: center;
+  background-color: white;
+  justify-content: space-evenly;
+`;
+
+const SwipeCardsContainer = styled.View`
+  height: 400;
+`;
+
+const SwipeButtonContainer = styled.View`
+  /* flex: 1; */
+  height: 64;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: flex-end;
 `;
 
 type Props = {
@@ -47,10 +58,6 @@ export default class MoodScreen extends React.Component<Props> {
       notFeeling: [],
     };
     this.SwipeCards = React.createRef();
-  }
-
-  onPressButton = () => {
-    this.props.navigation.navigate('Home');
   }
 
   onYes = (card: CardData) => {
@@ -93,43 +100,42 @@ export default class MoodScreen extends React.Component<Props> {
 
   forceSwipe = (direction: string) => {
     if (direction === LEFT) {
-      this.SwipeCards._forceLeftSwipe(); // eslint-disable-line no-underscore-dangle
+      // this.SwipeCards._forceLeftSwipe(); // eslint-disable-line no-underscore-dangle
     } else if (direction === RIGHT) {
-      this.SwipeCards._forceRightSwipe(); // eslint-disable-line no-underscore-dangle
+      // this.SwipeCards._forceRightSwipe(); // eslint-disable-line no-underscore-dangle
     }
   }
 
   render() {
     return (
       <CenterView>
-        <Button
-          onPress={this.onPressButton}
-          title="Home"
-          color="#000"
-        />
-        <SwipeCards
-          ref={this.SwipeCards}
-          cards={this.state.cards}
-          renderCard={(cardProps: CardData) => <Card {...cardProps} />}
-          renderNoMoreCards={this.noMoreCards}
+        <SwipeCardsContainer>
+          <SwipeCards
+            ref={this.SwipeCards}
+            cards={this.state.cards}
+            renderCard={(cardProps: CardData) => <Card {...cardProps} />}
+            renderNoMoreCards={this.noMoreCards}
 
-          showYup={false}
-          showNope={false}
-          handleYup={this.onYes}
-          handleNope={this.onNo}
+            showYup={false}
+            showNope={false}
+            handleYup={this.onYes}
+            handleNope={this.onNo}
 
-          dragY={false}
-        />
-        <Button
-          onPress={this.forceSwipe(LEFT)}
-          title="No"
-          color="red"
-        />
-        <Button
-          onPress={this.forceSwipe(RIGHT)}
-          title="Yes"
-          color="green"
-        />
+            dragY={false}
+          />
+        </SwipeCardsContainer>
+        <SwipeButtonContainer>
+          <Button
+            onPress={this.forceSwipe(LEFT)}
+            title="No"
+            color="red"
+          />
+          <Button
+            onPress={this.forceSwipe(RIGHT)}
+            title="Yes"
+            color="green"
+          />
+        </SwipeButtonContainer>
       </CenterView>
     );
   }
