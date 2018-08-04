@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Text, Image } from 'react-native';
 
 const PrettyCard = styled.View`
   justify-content: center;
@@ -11,10 +12,7 @@ const PrettyCard = styled.View`
   border-radius: 15px;
   overflow: visible;
   background-color: ${props => props.backgroundColor};
-`;
-
-const CardText = styled.Text`
-  font-size: 100px;
+  box-shadow: 5px 10px #888888;
 `;
 
 export default class Card extends React.Component {
@@ -23,13 +21,18 @@ export default class Card extends React.Component {
   }
 
   render() {
+    const path = `../images/${this.props.value}.png`;
+    console.log(path);
     return (
       <PrettyCard
         backgroundColor={this.props.backgroundColor}
       >
-        <CardText>
-          {this.props.text}
-        </CardText>
+        <Image
+          source={require('../images/happy.png')}
+        />
+        <Text>
+          Are you {this.props.value}?
+        </Text>
       </PrettyCard>
     );
   }
