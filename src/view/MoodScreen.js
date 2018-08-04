@@ -121,6 +121,7 @@ export default class MoodScreen extends React.Component<Props> {
           showNope={false}
           handleYup={this.onYes}
           handleNope={this.onNo}
+          onClickHandler={null}
 
           dragY={false}
         />
