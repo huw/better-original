@@ -1,12 +1,14 @@
 // @flow
-import React from 'react';
+// import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Text, AsyncStorage } from 'react-native';
-import { Table, TableWrapper, Rows, Row } from 'react-native-table-component';
+import { Text, AsyncStorage, StyleSheet, View  } from 'react-native';
+import React, { Component } from 'react';
+// import { StyleSheet, View } from 'react-native';
+import { Table, Rows, Row } from 'react-native-table-component';
 
 import styles from '../constants/styles';
 import Button from '../components/Button';
-import calcChiSquared from '../components/stats';
+import { calcChiSquared } from '../components/stats';
 
 import { moods, meditations } from '../../sampleData';
 
@@ -17,17 +19,22 @@ const CenterView = styled.View`
   justify-content: space-evenly;
 `;
 
-const PrettyMessage= styled.Text`
+const TableStyle = styled.Text`
+font-size: 10;
+color: ${styles.textColor};
+`;
+
+const PrettyMessage = styled.Text`
   font-size: 30;
   color: ${styles.textColor};
   font-weight: bold;
 `;
 
-const TableView = styled.View`
-  /* flex: 1; */
-  height: 200;
-  width: 100;
-`;
+const styles1 = StyleSheet.create({
+  container: {bottom:80, width: 200, height: 50 },
+  head: { width: 198, height: 50 },
+  text: { color: '#ffffff', width: 200, height: 50, fontSize:20, textAlign: 'left' }
+});
 
 type Props = {
   navigation: {
@@ -44,12 +51,13 @@ export default class HomeScreen extends React.Component<Props> {
     AsyncStorage.setItem('mood', JSON.stringify(moods));
     AsyncStorage.setItem('meditation', JSON.stringify(meditations));
     this.state = {
-      data: [
+      tableHead: ['emotion', 'percentage'],
+      tableData: [
         ['happy', '36'],
         ['sad', '40'],
         ['tired', '-10'],
-        ['relaxed', '69'],                
-      ],      
+        ['relaxed', '69']                
+      ],
     }
     calcChiSquared(this);
   }
@@ -78,6 +86,7 @@ export default class HomeScreen extends React.Component<Props> {
   }
 
   render() {
+    const state = this.state;
     return (
       <CenterView>
         <PrettyMessage>
@@ -87,12 +96,12 @@ export default class HomeScreen extends React.Component<Props> {
           onPress={this.onPressButton}
           title="Start Session"
         />
-        <TableView>
-          <Table>
-            <Row data={['Emotion', 'Change']} style={{ height: 20 }}/>
-            <Rows data={this.state.data} style={{ height: 20 }}/>
+      <View style={styles1.container}>
+        <Table borderStyle={{borderWidth: 0}}>
+            <Row data={this.state.tableHead} style={styles1.head} textStyle={styles1.text}/>
+            <Rows data={this.state.tableData} textStyle={styles1.text}/>
           </Table>
-        </TableView>
+          </View>
       </CenterView>
     );
   }
