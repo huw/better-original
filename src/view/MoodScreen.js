@@ -55,6 +55,17 @@ export default class MoodScreen extends React.Component<Props> {
     };
   }
 
+  cancelSession = () => {
+    const currentMeditationID = this.props.navigation.getParam('meditationID', null);
+    AsyncStorage.getItem('meditation', (err, result) => {
+      if (err) throw err;
+      const table = JSON.parse(result);
+      const newTable = table.filter(meditation => meditation.ID != currentMeditationID);
+      AsyncStorage.setItem('meditation', JSON.stringify(newTable));
+    })
+    this.props.navigation.navigate('Home');
+  }
+
   onYes = (card: Feeling) => {
     this.setState(prevState => ({
       amFeeling: [...prevState.amFeeling, card.value],
@@ -116,7 +127,7 @@ export default class MoodScreen extends React.Component<Props> {
     return (
       <CenterView>
         <StatusBar barStyle="light-content"/>
-        <CloseButton iconLeft transparent>
+        <CloseButton iconLeft transparent onPress={this.cancelSession}>
           <CloseIcon ios='ios-close' android='md-close'/>
         </CloseButton>
         <HintText>
