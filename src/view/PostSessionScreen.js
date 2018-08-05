@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Text, AsyncStorage } from 'react-native';
+import { View, Text, StatusBar, AsyncStorage } from 'react-native';
 
 import styles from '../constants/styles';
 import Button from '../components/Button';
@@ -17,9 +17,10 @@ const CenterView = styled.View`
 `;
 
 const PrettyMessage= styled.Text`
-  font-size: 20;
-  color: ${styles.textColor};
+  font-size: 36;
+  color: white;
   font-weight: bold;
+  margin-top: 16;
 `;
 
 type Props = {
@@ -97,12 +98,15 @@ export default class HomeScreen extends React.Component<Props> {
   render() {
     return (
       <CenterView>
-        <PrettyMessage>
-         {this.state && this.state.gainsPos}
-        </PrettyMessage>
-        <PrettyMessage>
-         {this.state && this.state.gainsNeg}
-        </PrettyMessage>
+        <StatusBar barStyle="light-content"/>
+        <View>
+          <PrettyMessage>
+          {this.state && this.state.gainsPos}
+          </PrettyMessage>
+          <PrettyMessage>
+          {this.state && this.state.gainsNeg}
+          </PrettyMessage>
+        </View>
         <Button
           onPress={this.onPressButton}
           title="Home"

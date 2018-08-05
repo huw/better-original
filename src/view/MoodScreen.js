@@ -114,7 +114,7 @@ export default class MoodScreen extends React.Component<Props> {
         console.log(tableM);
 
         this.props.navigation.navigate(
-          isPreSessionParam ? 'Timer' : 'Home',
+          isPreSessionParam ? 'Timer' : 'PostSessionScreen',
           { meditationID: currentMeditationID },
         );
       });

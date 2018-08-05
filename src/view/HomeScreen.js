@@ -66,9 +66,8 @@ const HintText = styled.Text`
 `;
 
 const styles1 = StyleSheet.create({
-  container: {bottom:80, width: 200, height: 50 },
-  head: { width: 198, height: 50 },
-  text: { color: '#ffffff', width: 200, height: 50, fontSize:20, textAlign: 'left' }
+  container: { height: 60, width: 300, alignSelf: 'center', left: 0, marginBottom: 30 },//{bottom:80, width: 200, height: 50 },
+  text: { color: 'white', width: 150, fontSize:20, fontWeight: '500', textAlign: 'center', paddingTop: 5, paddingBottom: 5 }
 });
 
 type Props = {
@@ -132,11 +131,10 @@ export default class HomeScreen extends React.Component<Props> {
           </HintTextContainer>
         </HeroTextContainer>
         <View style={styles1.container}>
-        <Table borderStyle={{borderWidth: 0}}>
-            <Row data={this.state.tableHead} style={styles1.head} textStyle={styles1.text}/>
+          <Table borderStyle={{borderWidth: 0}}>
             <Rows data={this.state.tableData} textStyle={styles1.text}/>
           </Table>
-          </View>
+        </View>
         <Button
           onPress={this.onPressButton}
           title="Start Session"
