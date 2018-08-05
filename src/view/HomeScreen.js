@@ -82,8 +82,8 @@ export default class HomeScreen extends React.Component<Props> {
 
   constructor(props) {
     super(props);
-    // AsyncStorage.setItem('mood', JSON.stringify(moods));
-    // AsyncStorage.setItem('meditation', JSON.stringify(meditations));
+    AsyncStorage.setItem('mood', JSON.stringify(moods));
+    AsyncStorage.setItem('meditation', JSON.stringify(meditations));
     this.state = {
       tableHead: ['emotion', 'percentage'],
     }
