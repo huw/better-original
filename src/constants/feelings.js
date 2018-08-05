@@ -22,17 +22,17 @@ export default [
   },
   {
     value: 'tired',
-    description: 'your eyes may be heavy ,\nyou want to be in bed,',
+    description: 'your eyes may be heavy,\nyou want to be in bed,',
     backgroundColor: '#444479',
   },
   // {
   //   value: 'anxious',
-  //   description: 'you are on edge ,\n worried about something that is undetermined',
+  //   description: 'you are on edge,\n worried about something that is undetermined',
   //   backgroundColor: '#42f456',
   // },
   // {
   //   value: 'annoyed',
-  //   description: 'you feel frustrated at an event ,\n put something here',
+  //   description: 'you feel frustrated at an event,\n put something here',
   //   backgroundColor: '#ff0000',
   // },
   // {
