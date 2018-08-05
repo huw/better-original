@@ -3,7 +3,7 @@ import { AsyncStorage } from 'react-native';
 const goodEmotions = ['happy', 'relaxed', 'loved', 'calm', 'calming', 'grateful', 'inspired', 'motivated'];
 const badEmotions = ['sad', 'tired', 'anxious', 'annoyed', 'angry', 'insecure', 'empty'];
 
-export default function calcChiSquared(object) {
+export function calcChiSquared(object) {
   AsyncStorage.getItem('mood', (err, result) => {
     if (err) throw err;
     const table = JSON.parse(result);
