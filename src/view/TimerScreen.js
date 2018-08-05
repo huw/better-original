@@ -9,7 +9,7 @@ import Button from '../components/Button';
 const Container = styled.View`
   flex: 1;
   background-color: ${styles.backgroundColor};
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
 `;
 
@@ -18,14 +18,25 @@ const TimeText = styled.Text`
   font-weight: ${timerStyle.fontWeight};
   color: ${timerStyle.textColor};
   align-self: center;
-  margin-bottom: 32;
+  margin-bottom: 30;
+`;
+
+const TimerContainer= styled.View`
+/* flex: 1; */
+justify-content: flex-end;
 `;
 
 const ButtonContainer = styled.View`
-  flex: 1;
+  /* flex: 1; */
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 80;
+`;
+
+const TimerButton = styled(Button)`
+  margin-right: 10px;
+  margin-left: 10px;
 `;
 
 type Props = {
@@ -82,14 +93,16 @@ export default class TimerScreen extends React.Component<Props> {
   render() {
     return (
       <Container>
-        <StatusBar barStyle="light-content"/>
-        <TimeText>{moment(this.state.time).format('mm:ss')}</TimeText>
+        <TimerContainer>        
+          <StatusBar barStyle="light-content"/>
+          <TimeText>{moment(this.state.time).format('mm:ss')}</TimeText>
+        </TimerContainer>
         <ButtonContainer>
-          <Button
+          <TimerButton
             onPress={this.cancelSession}
             title="Cancel"
           />
-          <Button
+          <TimerButton
             onPress={this.onPressButton}
             title="Done"
           />

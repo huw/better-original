@@ -103,7 +103,7 @@ export default class MoodScreen extends React.Component<Props> {
     return (
       <Button
         onPress={() => this.props.navigation.navigate(
-          isPreSessionParam ? 'Timer' : 'Home',
+          isPreSessionParam ? 'Timer' : 'PostSession',
           { meditationID: currentMeditationID },
         )}
         title="Done"
