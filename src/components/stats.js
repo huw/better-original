@@ -66,21 +66,29 @@ export function calcChiSquared(object) {
     const testStatistic = ((befNegAftPos - befPosAftNeg) ** 2) / (befNegAftPos + befPosAftNeg);
     console.log(`Test Statistic ${testStatistic}`);
     let msg;
+    let significance;
     if (testStatistic < chiSquaredTable[0.05]) {
       msg = 'meditating has not significantly improved your mind state';
+      significance = 'less than 95% confident';
     } else if (testStatistic >= chiSquaredTable[0.005] && befNegAftPos > befPosAftNeg) {
       msg = 'meditating has made your mind state much better!';
+      significance = '99.5% confident';
     } else if (testStatistic >= chiSquaredTable[0.005]) {
       msg = 'meditating has made your mind state worse';
+      significance = '99.5% confident';
     } else if (testStatistic >= chiSquaredTable[0.05] && befNegAftPos > befPosAftNeg) {
       msg = 'meditating has slightly improved your mind state';
+      significance = '95% confident';
     } else if (testStatistic >= chiSquaredTable[0.05]) {
       msg = 'meditating has made your mind state slightly worse';
+      significance = '95% confident';
     } else {
       msg = 'meditating has not significantly improved your mind state';
+      significance = 'less than 95% confident';
     }
     object.setState({
       chiSquaredMsg: msg,
+      chiSquaredSignificance: significance,
     });
   });
 }
