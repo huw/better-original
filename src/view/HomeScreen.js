@@ -18,9 +18,10 @@ const CenterView = styled.View`
 `;
 
 const PrettyMessage= styled.Text`
-  font-size: 30;
+  font-size: ${styles.fontSizeHeading};
   color: ${styles.textColor};
-  font-weight: bold;
+  font-weight: ${styles.fontWeightHeading};
+  text-align: center;
 `;
 
 const TableView = styled.View`
@@ -83,16 +84,16 @@ export default class HomeScreen extends React.Component<Props> {
         <PrettyMessage>
           {this.state && this.state.chiSquaredMsg}
         </PrettyMessage>
-        <Button
-          onPress={this.onPressButton}
-          title="Start Session"
-        />
         <TableView>
           <Table>
             <Row data={['Emotion', 'Change']} style={{ height: 20 }}/>
             <Rows data={this.state.data} style={{ height: 20 }}/>
           </Table>
         </TableView>
+        <Button
+          onPress={this.onPressButton}
+          title="Start Session"
+        />
       </CenterView>
     );
   }
