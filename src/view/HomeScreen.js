@@ -6,7 +6,7 @@ import { Table, TableWrapper, Rows, Row } from 'react-native-table-component';
 
 import styles from '../constants/styles';
 import Button from '../components/Button';
-import calcChiSquared from '../components/stats';
+import { calcChiSquared } from '../components/stats';
 
 import { moods, meditations } from '../../sampleData';
 
