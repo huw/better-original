@@ -3,6 +3,22 @@ import { AsyncStorage } from 'react-native';
 const goodEmotions = ['happy', 'relaxed', 'loved', 'calm', 'calming', 'grateful', 'inspired', 'motivated'];
 const badEmotions = ['sad', 'tired', 'anxious', 'annoyed', 'angry', 'insecure', 'empty'];
 
+// chi-squared table with 1 degree of freedom
+// we only really need to consider significance levels anyway
+export const chiSquaredTable = {
+  0.995: 0,
+  0.99: 0,
+  0.975: 0,
+  0.95: 0,
+  0.9: 0.02,
+  0.5: 0.45,
+  0.1: 2.71,
+  0.05: 3.84,
+  0.025: 5.02,
+  0.01: 6.63,
+  0.005: 7.88,
+};
+
 export function calcChiSquared(object) {
   AsyncStorage.getItem('mood', (err, result) => {
     if (err) throw err;
@@ -50,19 +66,29 @@ export function calcChiSquared(object) {
     const testStatistic = ((befNegAftPos - befPosAftNeg) ** 2) / (befNegAftPos + befPosAftNeg);
     console.log(`Test Statistic ${testStatistic}`);
     let msg;
-    if (testStatistic < 0.001) {
-      msg = 'No Observed Effects';
-    } else if (testStatistic < 0.05 && befNegAftPos > befPosAftNeg) {
-      msg = 'Slight Positive Effects';
-    } else if (testStatistic < 0.05) {
-      msg = 'Slight Negative Effects';
-    } else if (befNegAftPos > befPosAftNeg) {
-      msg = 'Great Positive Effects';
+    let significance;
+    if (testStatistic < chiSquaredTable[0.05]) {
+      msg = 'meditating has not significantly improved your mind state';
+      significance = 'less than 95% confident';
+    } else if (testStatistic >= chiSquaredTable[0.005] && befNegAftPos > befPosAftNeg) {
+      msg = 'meditating has made your mind state much better!';
+      significance = '99.5% confident';
+    } else if (testStatistic >= chiSquaredTable[0.005]) {
+      msg = 'meditating has made your mind state worse';
+      significance = '99.5% confident';
+    } else if (testStatistic >= chiSquaredTable[0.05] && befNegAftPos > befPosAftNeg) {
+      msg = 'meditating has slightly improved your mind state';
+      significance = '95% confident';
+    } else if (testStatistic >= chiSquaredTable[0.05]) {
+      msg = 'meditating has made your mind state slightly worse';
+      significance = '95% confident';
     } else {
-      msg = 'No Improvements';
+      msg = 'meditating has not significantly improved your mind state';
+      significance = 'less than 95% confident';
     }
     object.setState({
-      chiSquaredMsg: 'Status: ' + msg,
+      chiSquaredMsg: msg,
+      chiSquaredSignificance: significance,
     });
   });
 }

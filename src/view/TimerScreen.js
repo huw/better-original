@@ -31,7 +31,7 @@ const ButtonContainer = styled.View`
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 80;
-  width: 210;
+  width: 240;
 `;
 
 type Props = {

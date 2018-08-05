@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { Text, AsyncStorage } from 'react-native';
+import { Text, Image, StatusBar, AsyncStorage } from 'react-native';
 import { Table, TableWrapper, Rows, Row } from 'react-native-table-component';
 
 import styles from '../constants/styles';
@@ -17,10 +17,39 @@ const CenterView = styled.View`
   justify-content: space-evenly;
 `;
 
-const PrettyMessage= styled.Text`
-  font-size: 30;
-  color: ${styles.textColor};
-  font-weight: bold;
+const Logo = styled.Image`
+  width: 216;
+  height: 55;
+`;
+
+const HeroTextContainer = styled.View`
+  align-items: center;
+  padding-left: 20;
+  padding-right: 20;
+`;
+
+const HeadingText = styled.Text`
+  font-size: ${styles.fontSizeSubtitle};
+  font-weight: ${styles.fontWeightHeading};
+  color: white;
+  text-align: center;
+`;
+
+const HintTextContainer = styled.View`
+  background-color: green;
+  border-radius: 100;
+  padding-left: 12;
+  padding-right: 12;
+  padding-top: 5;
+  padding-bottom: 5;
+  margin-top: 16;
+`
+
+const HintText = styled.Text`
+  font-size: ${styles.fontSizeSubtitle};
+  font-weight: ${styles.fontWeightSubtitle};
+  color: white;
+  text-align: center;
 `;
 
 const TableView = styled.View`
@@ -74,19 +103,28 @@ export default class HomeScreen extends React.Component<Props> {
   render() {
     return (
       <CenterView>
-        <PrettyMessage>
-          {this.state && this.state.chiSquaredMsg}
-        </PrettyMessage>
-        <Button
-          onPress={this.onPressButton}
-          title="Start Session"
-        />
+        <StatusBar barStyle="light-content"/>
+        <Logo source={require('../images/logo.png')} />
+        <HeroTextContainer>
+          <HeadingText>
+            {this.state.chiSquaredMsg}
+          </HeadingText>
+          <HintTextContainer>
+            <HintText>
+              {this.state.chiSquaredSignificance}
+            </HintText>
+          </HintTextContainer>
+        </HeroTextContainer>
         <TableView>
           <Table>
             <Row data={['Emotion', 'Change']} style={{ height: 20 }}/>
             <Rows data={this.state.tableData} style={{ height: 20 }}/>
           </Table>
         </TableView>
+        <Button
+          onPress={this.onPressButton}
+          title="Start Session"
+        />
       </CenterView>
     );
   }
