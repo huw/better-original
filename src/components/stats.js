@@ -66,3 +66,47 @@ export function calcChiSquared(object) {
     });
   });
 }
+
+export function calcChanges(object) {
+  AsyncStorage.getItem('mood', (err, result) => {
+    if (err) throw err;
+    const table = JSON.parse(result);
+    let data = {
+      happy: [0, 0, 0],
+      sad: [0, 0, 0],
+      tired: [0, 0, 0],
+      relaxed: [0, 0, 0],
+    };
+    table.sort((a, b) => a.ID - b.ID);
+    for (let i = 0; i < table.length; i += 2) {
+      table[i].notMoods.forEach((element) => {
+        if (table[i + 1].moods.includes(element) && (data[element] || data[element] === 0)) {
+          data[element][0] += 1;
+        }
+        if (data[element] || data[element] === 0) {
+          data[element][2] += 1;
+        }
+      });
+      table[i].moods.forEach((element) => {
+        if (table[i + 1].notMoods.includes(element) && (data[element] || data[element] === 0)) {
+          data[element][1] += 1;
+        }
+        if (data[element] || data[element] === 0) {
+          data[element][2] += 1;
+        }
+      });
+    }
+    let newData = [
+      ['happy', ''],
+      ['sad', ''],
+      ['tired', ''],
+      ['relaxed', ''],
+    ];
+    object.setState({
+      tableData: newData.map((emotion) => {
+        const average = (data[emotion[0]][0] - data[emotion[0]][1]) / data[emotion[0]][2];
+        return [emotion[0], Math.round(average * 100).toString() + '%'];
+      }),
+    });
+  });
+}
